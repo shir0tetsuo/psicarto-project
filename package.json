@@ -9,19 +9,21 @@
     "express": "^4.16.4",
     "formdata": "^0.10.4",
     "got": "^9.6.0",
-    "http": "^0.0.0",
+    "http": "0.0.0",
     "irc": "^0.5.2",
     "irc-colors": "^1.5.0",
     "npmlog": "^4.1.2",
     "querystring": "^0.2.0",
     "socket.io": "^2.2.0",
     "sqlite3": "^4.0.6",
-    "wttr": "^0.0.4"
+    "wttr": "0.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

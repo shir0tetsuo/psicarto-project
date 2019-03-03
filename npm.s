@@ -4,14 +4,15 @@ npm i -g npm # update
 echo Stage 1
 rm -r node_modules/
 #rm package.json
-rm package-lock.json
+#rm package-lock.json
 echo Stage 2
 npm cache clean --force
 npm prune
 npm update
 npm install npm@latest -g
 echo Stage 3
-npm init
+#npm init
+npm install nodemon --save-dev
 npm install --save discord.js #discord runtime
 #npm install --save node-opus
 #npm install --save libsodium-wrapper
