@@ -41,18 +41,23 @@ sys.post('/login',function(req,res){
   var idnumber=req.body.idnumber;
   var key = req.body.key;
   if (idnumber !== null && idnumber !== undefined) {
-    const method = "sendAuth"
-    console.log("IDNUM = "+idnumber); // should probably call upon discord here
-  } else {
-    const method = "Authorize"
-    console.log("KEY = "+key);
+    var method = "sendAuth"
+    const fsHEAD = fs.readFileSync('pages/head.html')
+    const fsAAA = CreateNavigator(req, res, method)// Do some extra stuff to ensure login here
+    const fsTRAIL = fs.readFileSync('pages/trail.html')
+    console.log("ID = "+idnumber)
+    const GumGum = fsHEAD + fsAAA + fsTRAIL
+    res.send(GumGum)
+  } else if (key !== null && key !== undefined) {
+    var method = "Authorize"
+    const fsHEAD = fs.readFileSync('pages/head.html')
+    const fsAAA = CreateNavigator(req, res, method)// Do some extra stuff to ensure login here
+    const fsTRAIL = fs.readFileSync('pages/trail.html')
+    console.log("KEY = "+key)
+    const GumGum = fsHEAD + fsAAA + fsTRAIL
+    res.send(GumGum)
   }
-  const fsHEAD = fs.readFileSync('pages/head.html')
-  const fsAAA = CreateNavigator(req, res, method)// Do some extra stuff to ensure login here
-  const fsTRAIL = fs.readFileSync('pages/trail.html')
 
-  const GumGum = fsHEAD + fsAAA + fsTRAIL
-  res.send(GumGum)
 });
 
 client.on("ready", () => {
