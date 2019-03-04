@@ -3,3 +3,4 @@ node_modules/
 ui/
 public/vendor/
 desktop.ini
+settings.json
