@@ -112,7 +112,7 @@ sys.post('/pc/login',function(req,res){
     var fsAAC = ''
   }
   const fsTRAIL = fs.readFileSync('pages/trail.html')
-  const GumGum = fsHEAD + fsAAA + fsAAC + fsTRAIL + fsAAB
+  const GumGum = fsHEAD + fsAAA + fsTRAIL + fsAAC +  fsAAB
   res.send(GumGum)
 });
 
