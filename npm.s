@@ -39,7 +39,7 @@ npm install --save querystring
 npm install --save formdata
 #npm install --save chess.js
 npm install --save wttr
-npm install --save sqlite3 #database
+#npm install --save sqlite3 #database
 #npm install --save chess.js
 #cp /node/BAK/node_modules/sqlite -r /root/NC/utils/NorthStar/sabre.discord.js/node_modules/
 echo Done
