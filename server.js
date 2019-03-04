@@ -9,15 +9,15 @@ const path = require('path')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
-function CreateNavigator(request, response, method) {
-  if (method === "sendAuth" && request.url === "/pc/login") {
-    return fs.readFileSync('pages/authwait.html')
-  } else if (method === "Authorize" && request.url === "/pc/login") {
-    return fs.readFileSync('pages/authorized.html')
-  } else {
+function CreateNavigator(request, response) {
     return fs.readFileSync('pages/index.html')
-  }
   // Read token header from client-end here
+}
+
+function CreateResponse(request, response, handle) {
+  if (handle == 'error') return fs.readFileSync('pages/Error.html');
+  if (handle == 'idnum') return fs.readFileSync('pages/Icheck.html');
+  if (handle == 'key') return fs.readFileSync('pages/Kcheck.html')
 }
 
 sys.use(express.static('public'))
@@ -25,9 +25,8 @@ sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
-  const method = "get"
   const fsHEAD = fs.readFileSync('pages/head.html')
-  const fsAAA = CreateNavigator(request, response, method)// Do some extra stuff to ensure login here
+  const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
   const fsTRAIL = fs.readFileSync('pages/trail.html')
 
   const GumGum = fsHEAD + fsAAA + fsTRAIL
@@ -38,24 +37,23 @@ sys.get('/pc', (request, response) => {
 sys.post('/pc/login',function(req,res){
   var idnumber=req.body.idnumber;
   var key = req.body.key;
-  if (idnumber !== null && idnumber !== undefined) {
-    var method = "sendAuth"
-    const fsHEAD = fs.readFileSync('pages/head.html')
-    const fsAAA = CreateNavigator(req, res, method)// Do some extra stuff to ensure login here
-    const fsTRAIL = fs.readFileSync('pages/trail.html')
-    console.log("ID = "+idnumber)
-    const GumGum = fsHEAD + fsAAA + fsTRAIL
-    res.send(GumGum)
-  } else if (key !== null && key !== undefined) {
-    var method = "Authorize"
-    const fsHEAD = fs.readFileSync('pages/head.html')
-    const fsAAA = CreateNavigator(req, res, method)// Do some extra stuff to ensure login here
-    const fsTRAIL = fs.readFileSync('pages/trail.html')
-    console.log("KEY = "+key)
-    const GumGum = fsHEAD + fsAAA + fsTRAIL
-    res.send(GumGum)
+  const fsHEAD = fs.readFileSync('pages/head.html')
+  if (idnumber.length !== 0 && key.length !== 0) {
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'error')
+  } else if (idnumber.length !== 0 && key.length == 0) {
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'idnum')
+  } else if (key.length !== 0 && idnumber.length == 0) {
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'key')
+  } else {
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'error')
   }
-
+  const fsTRAIL = fs.readFileSync('pages/trail.html')
+  const GumGum = fsHEAD + fsAAA + fsAAB + fsTRAIL
+  res.send(GumGum)
 });
 
 client.on("ready", () => {
