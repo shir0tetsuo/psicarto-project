@@ -55,7 +55,7 @@ function GenerateAuthKey(uid) {
   const persons = client.users
   const person = persons.find(x => x.id == uid)
   const token = Cryptographic(18)
-  if (person[0] !== null && person[0] !== undefined) {
+  if (person !== null && person !== undefined) {
     person[0].send(token)
     return fs.readFileSync('pages/lcheck.html')
   } else {
