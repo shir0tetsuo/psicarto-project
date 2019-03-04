@@ -1,5 +1,5 @@
 body {
-  background-image: image("css/dpxl.png");
+  background-image: url("css/dpxl.png");
   background-color: #36393e;
   background-repeat: repeat;
   color: #789496;
