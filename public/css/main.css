@@ -24,32 +24,47 @@ body {
   margin: 0 auto;
   position: relative;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+.navbar {
+    overflow: hidden;
+    background-color: #2f3136;
 }
 
-li {
-  float: left;
+.subnav {
+    float: left;
+    overflow: hidden;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+.subnav .subnavbtn {
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
 }
 
-li a:hover:not(.active) {
-  background-color: #111;
+.navbar a:hover, .subnav:hover .subnavbtn {
+    /*background-color: red;*/
 }
 
-.active {
-  background-color: #a2ac37;
+.subnav-content {
+    display: none;
+    position: absolute;
+    /*left: 0;
+    /*background-color: red;
+    width: 100%;*/
+    z-index: 1;
+}
+
+.subnav-content a {
+    float: left;
+    margin-right: 10px;
+    padding: 40px;
+}
+
+.subnav:hover .subnav-content {
+    display: block;
 }
 #pressform input[type="text"],
 #pressform input[type="email"],
