@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  function LogUpdate() {
+    console.log("Update issued")
+  }
+</script>
 
 <div class="encompass">
   <div class="orenji">
@@ -5,32 +10,12 @@
   </div>
 </div>
 <div class="encompass">
-  <div class="prompt">
+  <div class="prompt" onload="LogUpdate()">
     <form action="/login" method="post" id="pressform">
       <input type="text" name="idnumber" id="idnumber" placeholder="Discord ID"><br>
       <input type="text" name="key" id="key" placeholder="Authorization Key"><br>
-      <div class="center" id="buttonControl"><button type="submit">Login</button></div>
+      <div class="center" id="buttonControl" style="display: none;"><button type="submit">Login</button></div>
     </form>
   </div>
-  <script type="text/javascript" src="js/combauth.js"></script>
-
-
-
-
-  <!--
-  <div class="inlet">
-    <h2>
-      <aqua>Please login with your Discord ID</aqua>
-    </h2>
-    <form action="/login" method="post">
-      <orange>IDNUMBER:</orange> <input type="text" name="idnumber" id="idnumber"><br>
-      <input type="submit" value="Request Unlock" style="background-color: #757575; color: #FFFFFF; width: 150px;">
-    </form><br>
-    <tilde>Alternatively, if you know your KEY, you can type it here.</tilde>
-    <form action="/login" method="post">
-      <orange>KEY:</orange> <input type="text" name="key" id="key"><br>
-      <input type="submit" value="Authorize" style="background-color: #757575; color: #FFFFFF; width: 150px;">
-    </form>
-  </div> -->
   <p>By using this page, you agree that the system may store cookies to help traverse this website.</p>
 </div>
