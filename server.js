@@ -52,11 +52,12 @@ function Cryptographic(xlen) {
 function GenerateAuthKey(uid) {
   // Connect to bot here
   // Do not commit to SQL unless the auth key is used
-  const persons = client.users
-  const person = persons.find(x => x.id == uid)
+  //const persons = client.users
+  //const person = persons.find(x => x.id == uid)
+  const person = client.users.get(uid)
   const token = Cryptographic(18)
   if (person !== null && person !== undefined) {
-    person[0].send(token)
+    person.send(token)
     return fs.readFileSync('pages/lcheck.html')
   } else {
     return fs.readFileSync('pages/NoUserFound.html')
