@@ -11,9 +11,11 @@ const client = new Discord.Client(); // discord client
 
 
 
-function CreateNavigator(request, response) {
-  if (request.url === "/login") {
+function CreateNavigator(request, response, method) {
+  if (method === "sendAuth" && request.url === "/login") {
     return fs.readFileSync('pages/authwait.html')
+  } else if (method === "Authorize" && request.url === "/login") {
+    return fs.readFileSync('pages/authorized.html')
   } else {
     return fs.readFileSync('pages/index.html')
   }
@@ -25,8 +27,9 @@ sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/', (request, response) => {
+  const method = "get"
   const fsHEAD = fs.readFileSync('pages/head.html')
-  const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
+  const fsAAA = CreateNavigator(request, response, method)// Do some extra stuff to ensure login here
   const fsTRAIL = fs.readFileSync('pages/trail.html')
 
   const GumGum = fsHEAD + fsAAA + fsTRAIL
@@ -35,12 +38,20 @@ sys.get('/', (request, response) => {
 })
 
 sys.post('/login',function(req,res){
-  const fsHEAD = fs.readFileSync('pages/head.html')
-  const fsAAA = CreateNavigator(req, res)// Do some extra stuff to ensure login here
-  const fsTRAIL = fs.readFileSync('pages/trail.html')
   var idnumber=req.body.idnumber;
+  var key = req.body.key;
+  if (idnumber !== null && idnumber !== undefined) {
+    const method = "sendAuth"
+    console.log("IDNUM = "+idnumber); // should probably call upon discord here
+  } else {
+    const method = "Authorize"
+    console.log("KEY = "+key);
+  }
+  const fsHEAD = fs.readFileSync('pages/head.html')
+  const fsAAA = CreateNavigator(req, res, method)// Do some extra stuff to ensure login here
+  const fsTRAIL = fs.readFileSync('pages/trail.html')
+
   const GumGum = fsHEAD + fsAAA + fsTRAIL
-  console.log("IDNUM = "+idnumber);
   res.send(GumGum)
 });
 
