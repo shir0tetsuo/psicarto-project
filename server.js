@@ -41,7 +41,7 @@ sys.post('/login',function(req,res){
   var idnumber=req.body.idnumber;
   const GumGum = fsHEAD + fsAAA + fsTRAIL
   console.log("IDNUM = "+idnumber);
-  response.send(GumGum)
+  res.send(GumGum)
 });
 
 client.on("ready", () => {
