@@ -96,6 +96,7 @@ sys.post('/pc/login',function(req,res){
   if (idnumber.length !== 0 && key.length !== 0) {
     const fsAAA = CreateNavigator(req, res)
     const fsAAB = CreateResponse(req, res, 'error')
+    const fsAAC = ''
   } else if (idnumber.length !== 0 && key.length == 0 && isNaN(idnumber) == false && idnumber.length >= 18 && idnumber.length < 22) { // If number is a number and the length is proper
     const fsAAA = CreateNavigator(req, res)
     const fsAAC = GenerateAuthKey(idnumber) // Connect with bot and send a message using Discord ID
@@ -103,12 +104,11 @@ sys.post('/pc/login',function(req,res){
   } else if (key.length !== 0 && idnumber.length == 0) {
     const fsAAA = CreateNavigator(req, res)
     const fsAAB = CreateResponse(req, res, 'key')
+    const fsAAC = ''
   } else {
     const fsAAA = CreateNavigator(req, res)
     const fsAAB = CreateResponse(req, res, 'error')
-  }
-  if (fsAAC == undefined || fsAAC == null) {
-    const fsAAC = '';
+    const fsAAC = ''
   }
   const fsTRAIL = fs.readFileSync('pages/trail.html')
   const GumGum = fsHEAD + fsAAA + fsAAC + fsTRAIL + fsAAB
