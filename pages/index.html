@@ -7,7 +7,7 @@
     boxCTL = document.getElementById("buttonControl")
     console.log("Update issued")
     if (idnum.value !== null && idnum.value !== undefined) {
-      if (key.value !== null && key.value !== undefined) {
+      if (key.value !== "") {
         flashBox.style.display = "block"
         flashMSG.innerHTML = "Both fields cannot be filled at the same time"
         boxCTL.style.display = "none"
@@ -16,7 +16,7 @@
         boxCTL.style.display = "block"
       }
     } else if (key.value !== null && key.value !== undefined) {
-      if (idnum.value !== null && idnum.value !== undefined) {
+      if (idnum.value !== "") {
         flashBox.style.display = "block"
         flashMSG.innerHTML = "Both fields cannot be filled at the same time"
         boxCTL.style.display = "none"
