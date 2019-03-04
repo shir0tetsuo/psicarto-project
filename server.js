@@ -10,9 +10,9 @@ const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
 function CreateNavigator(request, response, method) {
-  if (method === "sendAuth" && request.url === "/login") {
+  if (method === "sendAuth" && request.url === "/psicarto/login") {
     return fs.readFileSync('pages/authwait.html')
-  } else if (method === "Authorize" && request.url === "/login") {
+  } else if (method === "Authorize" && request.url === "/psicarto/login") {
     return fs.readFileSync('pages/authorized.html')
   } else {
     return fs.readFileSync('pages/index.html')
@@ -24,7 +24,7 @@ sys.use(express.static('public'))
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
-sys.get('/', (request, response) => {
+sys.get('/psicarto', (request, response) => {
   const method = "get"
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response, method)// Do some extra stuff to ensure login here
@@ -34,8 +34,8 @@ sys.get('/', (request, response) => {
   //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
   response.send(GumGum)
 })
-
-sys.post('/login',function(req,res){
+// TODO: Test idnumber against key, add database
+sys.post('/psicarto/login',function(req,res){
   var idnumber=req.body.idnumber;
   var key = req.body.key;
   if (idnumber !== null && idnumber !== undefined) {
