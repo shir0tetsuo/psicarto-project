@@ -9,8 +9,8 @@ const sys = express()
 const path = require('path')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
-const sql = require("sqlite");
-sql.open("../sql/pc.sqlite");
+//const sql = require("sqlite");
+//sql.open("../sql/pc.sqlite");
 
 function AccessSQL(request, response, Properties) { // This needs to wait till I import cookies
   /*if (type === "lv") {
