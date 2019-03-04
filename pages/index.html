@@ -1,6 +1,19 @@
 <script type="text/javascript">
-  function LogUpdate() {
+  function chech_user() {
+    var idnum = document.getElementById("idnumber"),
+    key = document.getElementById("key"),
+    flashBox = document.getElementById("flashArray"),
+    flashMSG = document.getElementById("flashComm"),
+    boxCTL = document.getElementById("buttonControl")
     console.log("Update issued")
+    if (idnum.value !== null && key.value !== null) {
+      flashBox.style.display = "block"
+      flashMSG.innerHTML = ""
+      boxCTL.style.display = "none"
+    } else {
+      flashBox.style.display = "none"
+      boxCTL.style.display = "block"
+    }
   }
 </script>
 
@@ -12,8 +25,8 @@
 <div class="encompass">
   <div class="prompt" onload="LogUpdate()">
     <form action="/login" method="post" id="pressform">
-      <input type="text" name="idnumber" id="idnumber" placeholder="Discord ID"><br>
-      <input type="text" name="key" id="key" placeholder="Authorization Key"><br>
+      <input type="text" name="idnumber" id="idnumber" onChange="check_user(this.value);" placeholder="Discord ID"><br>
+      <input type="text" name="key" id="key" onChange="check_user(this.value);" placeholder="Authorization Key"><br>
       <div class="center" id="buttonControl" style="display: none;"><button type="submit">Login</button></div>
     </form>
   </div>
