@@ -4,6 +4,7 @@
   "description": "Side project using node, HTTP/HTML, CSS and SQL to create and collect \"cards\"",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "chalk": "^2.4.2",
     "discord.js": "^11.4.2",
     "express": "^4.16.4",

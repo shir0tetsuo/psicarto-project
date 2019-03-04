@@ -12,6 +12,7 @@ npm update
 npm install npm@latest -g
 echo Stage 3
 #npm init
+npm install body-parser --save
 npm install nodemon --save-dev
 npm install --save discord.js #discord runtime
 #npm install --save node-opus
