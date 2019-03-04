@@ -5,12 +5,23 @@ const http = require('http');
 const express = require('express')
 const sys = express()
 const path = require('path')
+const Discord = require ("discord.js"); // discord client
+const client = new Discord.Client(); // discord client
 
+function CreateNavigator() {
+  return fs.readFileSync('pages/index.html')
+}
 
 sys.use(express.static('public'))
 
 sys.get('/', (request, response) => {
-  response.sendFile(path.resolve(__dirname, 'pages/index.html'))
+  const fsHEAD = fs.readFileSync('pages/head.html')
+  const fsAAA = CreateNavigator()// Do some extra stuff to ensure login here
+  const fsTRAIL = fs.readFileSync('pages/trail.html')
+
+  const GumGum = fsHEAD + fsAAA + fsTRAIL
+  //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
+  response.sendFile(GumGum)
 })
 
 sys.listen(2600, () => {
