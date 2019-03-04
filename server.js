@@ -44,7 +44,7 @@ sys.post('/pc/login',function(req,res){
   } else if (idnumber.length !== 0 && key.length == 0) {
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'idnum')
-  } else if (key.length !== 0 && idnumber.length == 0) {
+  } else if (key.length !== 0 && idnumber.length == 0 && idnumber.isNaN(false)) {
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'key')
   } else {
@@ -67,27 +67,3 @@ sys.listen(2600, () => {
   console.log('Discord listening.')
   client.on('error', console.error)
 })
-
-/////////////////////////////////////////////////////////
-//const fsHeader = fs.readFileSync('headers.html')
-//const fsTrailer = fs.readFileSync('trailers.html')
-
-//const server = http.createServer((request, response) => {
-
-//  console.log(request.url)
-
-//  if (request.url === '/') {
-//    response.write(fsHeader)
-//    response.write('Hello, World!')
-//    response.end(fsTrailer)
-//  } else if (request.url === '/favicon.ico') {
-//    response.end(fs.readFileSync('./favicon.ico'))
-//  } else {
-//    response.writeHead(400)
-//    response.end('I dont exist')
-//  }
-
-//})
-
-//server.listen(2500)
-//console.log('Server listening.')
