@@ -1,3 +1,229 @@
 body {
-  background-color: red;
+  background-color: #36393e;
+  background-repeat: repeat;
+  color: #789496;
+  width: 75%;
+  min-width: 420px;
+  margin: auto;
+  font-family: monospace;
+  font-size: 18px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.encompass {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.orenji {
+  background-color: #4a433a;
+  border-radius: 2px;
+  border-left: 5px solid orange;
+  padding-left: 20px;
+}
+.Float {
+  border-radius: 2px;
+  position: fixed;
+  top: 3px;
+  border-left: 5px solid orange;
+  padding-left: 50%;
+}
+.Construction {
+  background-image: url(TransparentBar.png);
+  background-repeat: repeat;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.inlet {
+  min-width: 200px;
+  background-color: #2f3136;
+  border-left: 5px solid orange;
+  padding-left: 20px;
+  padding-right: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+}
+.inletGalaxy {
+  background-attachment: fixed;
+  background-image: url(wallhaven-337048.jpg);
+  background-size: cover;
+  min-width: 200px;
+  background-color: #2f3136;
+  border-left: 5px solid orange;
+  padding-left: 20px;
+  padding-right: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+}
+.inlet7C {
+  background-attachment: fixed;
+  background-image: url(7c.jpg);
+  background-size: cover;
+  min-width: 200px;
+  background-color: #2f3136;
+  border-left: 5px solid orange;
+  padding-left: 20px;
+  padding-right: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+}
+.inletHexagons {
+  background-attachment: fixed;
+  background-image: url(hexagons.jpg);
+  background-size: cover;
+  min-width: 200px;
+  background-color: #2f3136;
+  border-left: 5px solid orange;
+  padding-left: 20px;
+  padding-right: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+}
+.imgdot {
+  float: left;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+.imgpad {
+  padding-left: 90px;
+}
+.code {
+  background-color: #222222;
+  font-size: 14px;
+  border-right: 15px solid #2f3136;
+}
+a {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  border-left: 5px solid #2d74d2;
+  color: #2d74d2;
+  background-color: #2f3136;
+  border-radius: 2px;
+}
+a:hover {
+  color: #b5891c;
+  background-color: #36393e;
+  border-left: 5px solid #b5891c;
+  -moz-transition: .25s ease-in-out;
+  -webkit-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+/* Color Blocks */
+blue {
+  color: #007bec;
+}
+red {
+  color: #ee1212;
+}
+yellow {
+  color: #ebd300;
+}
+green {
+  color: #00e825;
+}
+orange {
+  color: #ff7300;
+}
+purple {
+  color: #b300b6;
+}
+indigo {
+  color: #4B0082;
+}
+black {
+  color: #000000;
+}
+white {
+  color: #FFFFFF;
+}
+pink {
+  color: #ff0bac;
+}
+gray {
+  color: #5d5758;
+}
+aqua {
+  color: #44eeff;
+}
+teal {
+  color: #00fc8b;
+}
+gold {
+  color: #ffd700;
+}
+rose {
+  color: #ffe4e1;
+}
+silver {
+  color: #c0c0c0;
+}
+tilde {
+  background-color: #222222;
+}
+.check {
+  display: none;
+}
+
+input#toggle {
+max-height: 0;
+max-width: 0;
+opacity: 0;
+}
+input#toggle + label {
+display: inline-block;
+position: relative;
+box-shadow: inset 0 0 0px 1px #d5d5d5;
+text-indent: -5000px;
+height: 30px;
+width: 50px;
+border-radius: 15px;
+}
+
+input#toggle + label:before {
+content: "";
+position: absolute;
+display: block;
+height: 30px;
+width: 30px;
+top: 0;
+left: 0;
+border-radius: 15px;
+background: rgba(255,191,17,0);
+-moz-transition: .25s ease-in-out;
+-webkit-transition: .25s ease-in-out;
+transition: .25s ease-in-out;
+}
+
+input#toggle + label:after {
+content: "";
+position: absolute;
+display: block;
+height: 30px;
+width: 30px;
+top: 0;
+left: 0px;
+border-radius: 15px;
+background: white;
+box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.2);
+-moz-transition: .25s ease-in-out;
+-webkit-transition: .25s ease-in-out;
+transition: .25s ease-in-out;
+}
+input#toggle:checked + label:before {
+width: 50px;
+background: rgba(255,191,17,1);
+}
+
+input#toggle:checked + label:after {
+left: 20px;
+box-shadow: inset 0 0 0 1px rgba(255,191,17,1), 0 2px 4px rgba(0,0,0,.2);
 }
