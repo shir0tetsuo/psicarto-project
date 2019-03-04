@@ -7,8 +7,22 @@
       <div class="inlet">
         <h2><aqua>Please login with your Discord ID</aqua></h2>
         <form action="/login" method="post">
-        <orange>IDNUMBER:</orange> <input type="text" name="idnumber"><br>
-      <input type="submit" value="Request Unlock" style="background-color: #757575; color: #FFFFFF; width: 100px;">
+        <orange>IDNUMBER:</orange> <input type="text" name="idnumber" id="idnumber"><br>
+      <input type="submit" value="Request Unlock" style="background-color: #757575; color: #FFFFFF; width: 150px;">
     </form></div>
       </div>
     </div>
+    <script>
+      $(document).ready(function(){
+        var user,pass;
+        $("#submit").click(function(){
+          idnumber=$("#idnumber").val();
+          $.post("http://localhost:3000/login",{idnumber: idnumber}, function(data){
+            if(data==='done')
+              {
+                alert("login success");
+              }
+          });
+        });
+      });
+    </script>

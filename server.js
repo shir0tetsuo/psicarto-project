@@ -1,6 +1,7 @@
 const settings = require('./settings.json')
 const exec = require('child_process').exec;
 const fs = require('fs')
+const bodyParser = require('body-parser')
 const http = require('http');
 const express = require('express')
 const sys = express()
@@ -16,6 +17,8 @@ function CreateNavigator(request, response) {
 }
 
 sys.use(express.static('public'))
+sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
+sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/', (request, response) => {
   const fsHEAD = fs.readFileSync('pages/head.html')
@@ -27,11 +30,17 @@ sys.get('/', (request, response) => {
   response.send(GumGum)
 })
 
-sys.post('/login', (request, response) => {
-  var discordID = request.body.idnumber
-  console.log(discordID)
-  response.end('accepted')
-})
+sys.post('/login',function(req,res){
+  var idnumber=req.body.idnumber;
+  console.log("IDNUM = "+idnumber);
+  res.end("yes");
+});
+
+//sys.post('/login', (request, response) => {
+//  var discordID = request.body.idnumber
+//  console.log(discordID)
+//  response.end('accepted')
+//})
 
 
 client.on("ready", () => {
