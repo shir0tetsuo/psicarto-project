@@ -41,7 +41,7 @@ sys.post('/pc/login',function(req,res){
   if (idnumber.length !== 0 && key.length !== 0) {
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'error')
-  } else if (idnumber.length !== 0 && key.length == 0 && idnumber.isNaN(false)) {
+  } else if (idnumber.length !== 0 && key.length == 0 && isNaN(idnumber) == false) {
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'idnum')
   } else if (key.length !== 0 && idnumber.length == 0) {
