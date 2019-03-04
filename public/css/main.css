@@ -9,6 +9,9 @@ body {
   font-family: monospace;
   font-size: 18px;
 }
+.flashArray {
+  display: none;
+}
 .center {
   display: block;
   margin-left: auto;
