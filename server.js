@@ -94,21 +94,21 @@ sys.post('/pc/login',function(req,res){
   var key = req.body.key;
   const fsHEAD = fs.readFileSync('pages/head.html')
   if (idnumber.length !== 0 && key.length !== 0) {
-    const fsAAA = CreateNavigator(req, res)
-    const fsAAB = CreateResponse(req, res, 'error')
-    const fsAAC = ''
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'error')
+    var fsAAC = ''
   } else if (idnumber.length !== 0 && key.length == 0 && isNaN(idnumber) == false && idnumber.length >= 18 && idnumber.length < 22) { // If number is a number and the length is proper
-    const fsAAA = CreateNavigator(req, res)
-    const fsAAC = GenerateAuthKey(idnumber) // Connect with bot and send a message using Discord ID
-    const fsAAB = CreateResponse(req, res, 'idnum')
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAC = GenerateAuthKey(idnumber) // Connect with bot and send a message using Discord ID
+    var fsAAB = CreateResponse(req, res, 'idnum')
   } else if (key.length !== 0 && idnumber.length == 0) {
-    const fsAAA = CreateNavigator(req, res)
-    const fsAAB = CreateResponse(req, res, 'key')
-    const fsAAC = ''
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'key')
+    var fsAAC = ''
   } else {
-    const fsAAA = CreateNavigator(req, res)
-    const fsAAB = CreateResponse(req, res, 'error')
-    const fsAAC = ''
+    var fsAAA = CreateNavigator(req, res)
+    var fsAAB = CreateResponse(req, res, 'error')
+    var fsAAC = ''
   }
   const fsTRAIL = fs.readFileSync('pages/trail.html')
   const GumGum = fsHEAD + fsAAA + fsAAC + fsTRAIL + fsAAB
