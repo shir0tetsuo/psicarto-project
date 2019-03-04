@@ -36,13 +36,6 @@ sys.post('/login',function(req,res){
   res.end("yes");
 });
 
-//sys.post('/login', (request, response) => {
-//  var discordID = request.body.idnumber
-//  console.log(discordID)
-//  response.end('accepted')
-//})
-
-
 client.on("ready", () => {
   console.log("SPIRITO-BOT ONLINE")
   client.user.setStatus("online")

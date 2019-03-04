@@ -12,17 +12,3 @@
     </form></div>
       </div>
     </div>
-    <script>
-      $(document).ready(function(){
-        var user,pass;
-        $("#submit").click(function(){
-          idnumber=$("#idnumber").val();
-          $.post("http://localhost:3000/login",{idnumber: idnumber}, function(data){
-            if(data==='done')
-              {
-                alert("login success");
-              }
-          });
-        });
-      });
-    </script>
