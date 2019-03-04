@@ -35,7 +35,7 @@ sys.get('/pc', (request, response) => {
   response.send(GumGum)
 })
 // TODO: Test idnumber against key, add database
-sys.post('/login',function(req,res){
+sys.post('/pc/login',function(req,res){
   var idnumber=req.body.idnumber;
   var key = req.body.key;
   if (idnumber !== null && idnumber !== undefined) {
