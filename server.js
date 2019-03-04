@@ -21,7 +21,7 @@ sys.get('/', (request, response) => {
 
   const GumGum = fsHEAD + fsAAA + fsTRAIL
   //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
-  response.sendFile(GumGum)
+  response.send(GumGum)
 })
 
 sys.listen(2600, () => {
