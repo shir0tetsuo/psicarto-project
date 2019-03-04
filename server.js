@@ -52,7 +52,7 @@ sys.post('/pc/login',function(req,res){
     var fsAAB = CreateResponse(req, res, 'error')
   }
   const fsTRAIL = fs.readFileSync('pages/trail.html')
-  const GumGum = fsHEAD + fsAAA + fsAAB + fsTRAIL
+  const GumGum = fsHEAD + fsAAA + fsTRAIL + fsAAB
   res.send(GumGum)
 });
 
