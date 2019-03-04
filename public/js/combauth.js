@@ -4,9 +4,10 @@ console.log("Authorization comb active")
   var flashController = document.getElementById("flashArray")
   var flashMessage = document.getElementById("FlashComm")
   var buttonController = document.getElementById("buttonControl")
-  if (key.value == undefined && idnumber.value == undefined) {
-    flashController.style="display: block;"
+  buttonController.style.display = "none"
+  if (key.value == null && idnumber.value == null) {
+    flashController.style.display = "block"
     flashMessage.innerHTML="A value is required before submitting."
   } else {
-    buttonController.style="display: block;"
+    buttonController.style.display="block"
   }
