@@ -107,7 +107,9 @@ sys.post('/pc/login',function(req,res){
     const fsAAA = CreateNavigator(req, res)
     const fsAAB = CreateResponse(req, res, 'error')
   }
-  if (fsAAC == undefined || fsAAC == null) const fsAAC = '';
+  if (fsAAC == undefined || fsAAC == null) {
+    const fsAAC = '';
+  }
   const fsTRAIL = fs.readFileSync('pages/trail.html')
   const GumGum = fsHEAD + fsAAA + fsAAC + fsTRAIL + fsAAB
   res.send(GumGum)
