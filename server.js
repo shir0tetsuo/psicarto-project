@@ -12,8 +12,12 @@ const client = new Discord.Client(); // discord client
 
 
 function CreateNavigator(request, response) {
+  if (request.url === "/login") {
+    return fs.readFileSync('pages/authwait.html')
+  } else {
+    return fs.readFileSync('pages/index.html')
+  }
   // Read token header from client-end here
-  return fs.readFileSync('pages/index.html')
 }
 
 sys.use(express.static('public'))
@@ -31,9 +35,13 @@ sys.get('/', (request, response) => {
 })
 
 sys.post('/login',function(req,res){
+  const fsHEAD = fs.readFileSync('pages/head.html')
+  const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
+  const fsTRAIL = fs.readFileSync('pages/trail.html')
   var idnumber=req.body.idnumber;
+  const GumGum = fsHEAD + fsAAA + fsTRAIL
   console.log("IDNUM = "+idnumber);
-  res.end("yes");
+  response.send(GumGum)
 });
 
 client.on("ready", () => {
