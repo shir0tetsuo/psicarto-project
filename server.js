@@ -28,7 +28,9 @@ sys.get('/', (request, response) => {
 })
 
 sys.post('/login', (request, response) => {
-  console.log(request)
+  var discordID = request.body.idnumber
+  console.log(discordID)
+  response.end('accepted')
 })
 
 
