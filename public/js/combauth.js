@@ -1,4 +1,4 @@
-function checkLoginBox() {
+console.log("Authorization comb active")
   var idnumber = document.getElementById("idnumber")
   var key = document.getElementById("key")
   var flashController = document.getElementById("flashArray")
@@ -10,4 +10,3 @@ function checkLoginBox() {
   } else {
     buttonController.style="display: block;"
   }
-}
