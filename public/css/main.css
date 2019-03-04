@@ -15,6 +15,81 @@ body {
   margin-right: auto;
   width: 90%;
 }
+.prompt {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+#pressform input[type="text"],
+#pressform input[type="email"],
+#pressform input[type="tel"],
+#pressform input[type="url"],
+#pressform textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+#pressform input[type="text"]:hover,
+#pressform input[type="email"]:hover,
+#pressform input[type="tel"]:hover,
+#pressform input[type="url"]:hover,
+#pressform textarea:hover {
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
+  border: 1px solid #aaa;
+}
+#pressform textarea {
+  height: 100px;
+  max-width: 100%;
+  resize: none;
+}
+
+#pressform button[type="submit"] {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: #4CAF50;
+  color: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+#pressform button[type="submit"]:hover {
+  background: #43A047;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#pressform button[type="submit"]:active {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+#pressform input:focus,
+#pressform textarea:focus {
+  outline: 0;
+  border: 1px solid #aaa;
+}
+
+::-webkit-input-placeholder {
+  color: #888;
+}
+
+:-moz-placeholder {
+  color: #888;
+}
+
+::-moz-placeholder {
+  color: #888;
+}
+
+:-ms-input-placeholder {
+  color: #888;
+}
 .encompass {
   padding-top: 15px;
   padding-bottom: 15px;
