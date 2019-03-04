@@ -52,7 +52,7 @@ body {
   cursor: pointer;
   width: 50%;
   border: none;
-  background: #0FF;
+  background: #789496;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -60,7 +60,7 @@ body {
 }
 
 #pressform button[type="submit"]:hover {
-  background: #10b5b6;
+  background: #b1af75;
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
