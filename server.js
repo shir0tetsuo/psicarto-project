@@ -10,9 +10,9 @@ const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
 function CreateNavigator(request, response, method) {
-  if (method === "sendAuth" && request.url === "/login") {
+  if (method === "sendAuth" && request.url === "/pc/login") {
     return fs.readFileSync('pages/authwait.html')
-  } else if (method === "Authorize" && request.url === "/login") {
+  } else if (method === "Authorize" && request.url === "/pc/login") {
     return fs.readFileSync('pages/authorized.html')
   } else {
     return fs.readFileSync('pages/index.html')
@@ -24,7 +24,7 @@ sys.use(express.static('public'))
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
-sys.get('/', (request, response) => {
+sys.get('/pc', (request, response) => {
   const method = "get"
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response, method)// Do some extra stuff to ensure login here
