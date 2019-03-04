@@ -9,8 +9,6 @@ const path = require('path')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 
-
-
 function CreateNavigator(request, response, method) {
   if (method === "sendAuth" && request.url === "/login") {
     return fs.readFileSync('pages/authwait.html')
