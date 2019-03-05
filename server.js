@@ -116,6 +116,11 @@ sys.use(express.static('public'))
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
+sys.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(404).send('Something broke!')
+})
+
 sys.get('/pc', (request, response) => {
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
