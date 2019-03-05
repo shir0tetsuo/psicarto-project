@@ -64,7 +64,7 @@ function GenerateAuthKey(uid) {
   }, 10000)
   if (person !== null && person !== undefined) {
     person.send({ embed: {
-      color: 0xebbd57,
+      color: 0x00ffff,
       title: 'shadowsword.tk/pc',
       url: 'https://shadowsword.tk/pc',
       description: 'Use this for your login on Psicarto',
