@@ -74,7 +74,7 @@ function GenerateAuthKey(uid) {
           description: `\`\`\`diff\n- [#] Authorization Key\`\`\`**\`\`\`diff\n${token}\`\`\`**`
         }
       ],
-      timestamp: new Date();
+      timestamp: new Date()
     }}
     return fs.readFileSync('pages/lcheck.html')
   } else {
