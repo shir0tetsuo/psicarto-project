@@ -141,7 +141,7 @@ client.on("ready", () => {
 
 client.on("message", message => {
   if (message.isMentioned(client.user.id)) {
-    message.author.send("Please go to https://shadowsword.tk/pc and enter "+client.user.id+" as your Discord ID")
+    message.author.send("Please go to https://shadowsword.tk/pc and enter "+message.author.id+" as your Discord ID")
   }
 })
 
