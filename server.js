@@ -10,6 +10,11 @@ const path = require('path')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 let timer = new Set();
+
+var axis = new Object();
+// axis[idnum] = [token]
+
+
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
 // If dictionary returns true then export that [#] out to database.
@@ -17,7 +22,7 @@ let timer = new Set();
 //
 // userId, token, ban, cookie, last
 // FROM THERE "Get Started" => now we have a cookie and a local login sql
-// can add request src from there 
+// can add request src from there
 
 //const sql = require("sqlite");
 //sql.open("../sql/pc.sqlite");
@@ -67,6 +72,7 @@ function GenerateAuthKey(uid) {
   const person = client.users.get(uid)
   if (timer.has(uid)) return fs.readFileSync('pages/throttleWarn.html');
   const token = Cryptographic(18)
+  axis[token] = uid;
   timer.add(uid)
   setTimeout(() => {
     timer.delete(uid)
@@ -102,6 +108,7 @@ function CreateNavigator(request, response) {
 function CreateResponse(request, response, handle) {
   if (handle == 'error') return fs.readFileSync('pages/Error.html');
   if (handle == 'idnum') return '';
+  if (handle == 'nokey') return fs.readFileSync('pages/nokey.html');
   if (handle == 'key') return fs.readFileSync('pages/Kcheck.html')
 }
 
@@ -132,9 +139,16 @@ sys.post('/pc/login',function(req,res){
     var fsAAC = GenerateAuthKey(idnumber) // Connect with bot and send a message using Discord ID
     var fsAAB = CreateResponse(req, res, 'idnum')
   } else if (key.length !== 0 && idnumber.length == 0) {
-    var fsAAA = CreateNavigator(req, res)
-    var fsAAB = CreateResponse(req, res, 'key')
-    var fsAAC = ''
+    // THIS IF STATEMENT below should come AFTER a database check!
+    if (axis[key] !== undefined) {
+      var fsAAA = '' // CreateNavigator(req, res)
+      var fsAAB = CreateResponse(req, res, 'key')
+      var fsAAC = ''
+    } else {
+      var fsAAA = CreateNavigator(req, res)
+      var fsAAB = CreateResponse(req, res, 'nokey')
+      var fsAAC = ''
+    }
   } else {
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'error')
