@@ -117,7 +117,7 @@ sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
-  if (res.status(404)) {
+  if (response.status(404)) {
     return response.send('BROKEN')
   }
   const fsHEAD = fs.readFileSync('pages/head.html')
