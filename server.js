@@ -45,7 +45,7 @@ function Cryptographic(xlen) {
     for (var i = 0, n = charset.length; i < xlen; ++i) {
         retVal += charset.charAt(Math.floor(Math.random() * n));
     }
-    console.log(chalk.blue("Generated new key = "+retVal))
+    console.log(chalk.blueBright("Generated new key = "+retVal))
     return retVal;
 }
 
