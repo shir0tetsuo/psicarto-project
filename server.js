@@ -10,6 +10,15 @@ const path = require('path')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 let timer = new Set();
+// Create dictionary: user ID + authorization token
+// At database creation (when user enters auth) search Dictionary,
+// If dictionary returns true then export that [#] out to database.
+// DATABASE should consist of:
+//
+// userId, token, ban, cookie, last
+// FROM THERE "Get Started" => now we have a cookie and a local login sql
+// can add request src from there 
+
 //const sql = require("sqlite");
 //sql.open("../sql/pc.sqlite");
 
@@ -77,6 +86,8 @@ function GenerateAuthKey(uid) {
       timestamp: new Date()
     }})
     return fs.readFileSync('pages/lcheck.html')
+    // ADD Cookie with uid and token
+    // ADD Dictionary: uid = token
   } else {
     return fs.readFileSync('pages/NoUserFound.html')
   }
