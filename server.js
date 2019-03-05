@@ -65,13 +65,13 @@ function GenerateAuthKey(uid) {
   if (person !== null && person !== undefined) {
     person.send({ embed: {
       color: 0xebbd57,
-      title: 'Authorization Key',
+      title: 'shadowsword.tk/pc',
       url: 'https://shadowsword.tk/pc',
       description: 'Use this for your login on Psicarto',
       fields: [
         {
           name: 'Incoming Key!',
-          value: `\`\`\`diff\n- [#] Authorization Key\`\`\`**\`\`\`diff\n${token}\`\`\`**`
+          value: `\`\`\`diff\n- [###]\`\`\`**\`\`\`diff\n${token}\`\`\`**`
         }
       ],
       timestamp: new Date()
