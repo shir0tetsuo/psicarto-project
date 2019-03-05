@@ -122,6 +122,9 @@ sys.use(function (err, req, res, next) {
 })
 
 sys.get('/pc', (request, response) => {
+  if (res.status(404)) {
+    return response.send('BROKEN')
+  }
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
   var fsTRAIL = fs.readFileSync('pages/trail.html')
