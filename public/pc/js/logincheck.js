@@ -19,6 +19,5 @@ function check_user() {
   }
   setTimeout(() => {
     check_user()
-    console.log("Timeout complete")
   }, 2000)
 }
