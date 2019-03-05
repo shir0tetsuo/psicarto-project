@@ -71,7 +71,7 @@ function GenerateAuthKey(uid) {
       fields: [
         {
           name: 'Incoming Key!',
-          description: `\`\`\`diff\n- [#] Authorization Key\`\`\`**\`\`\`diff\n${token}\`\`\`**`
+          value: `\`\`\`diff\n- [#] Authorization Key\`\`\`**\`\`\`diff\n${token}\`\`\`**`
         }
       ],
       timestamp: new Date()
