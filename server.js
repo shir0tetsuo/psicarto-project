@@ -75,7 +75,7 @@ function GenerateAuthKey(uid) {
         }
       ],
       timestamp: new Date()
-    }}
+    }})
     return fs.readFileSync('pages/lcheck.html')
   } else {
     return fs.readFileSync('pages/NoUserFound.html')
