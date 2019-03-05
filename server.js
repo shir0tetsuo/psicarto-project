@@ -9,6 +9,7 @@ const sys = express()
 const path = require('path')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
+let timer = new Set();
 //const sql = require("sqlite");
 //sql.open("../sql/pc.sqlite");
 
@@ -55,9 +56,26 @@ function GenerateAuthKey(uid) {
   //const persons = client.users
   //const person = persons.find(x => x.id == uid)
   const person = client.users.get(uid)
+  if (timer.has(uid)) return fs.readFileSync('pages/throttleWarn.html');
   const token = Cryptographic(18)
+  timer.add(uid)
+  setTimeout(() => {
+    timer.delete(uid)
+  }, 10000)
   if (person !== null && person !== undefined) {
-    person.send(token)
+    person.send({ embed: {
+      color: 0xebbd57,
+      title: 'Authorization Key',
+      url: 'https://shadowsword.tk/pc',
+      description: 'Use this for your login on Psicarto',
+      fields: [
+        {
+          name: 'Incoming Key!',
+          description: `\`\`\`diff\n- [#] Authorization Key\`\`\`**\`\`\`diff\n${token}\`\`\`**`
+        }
+      ],
+      timestamp: new Date();
+    }}
     return fs.readFileSync('pages/lcheck.html')
   } else {
     return fs.readFileSync('pages/NoUserFound.html')
@@ -120,6 +138,12 @@ client.on("ready", () => {
   console.log("SPIRITO-BOT ONLINE")
   client.user.setStatus("online")
 });
+
+client.on("message", message => {
+  if (message.isMentioned(client.user.id)) {
+    message.author.send("Please go to https://shadowsword.tk/pc and enter "+client.user.id+" as your Discord ID")
+  }
+})
 
 sys.listen(2600, () => {
   console.log('App listening.')
