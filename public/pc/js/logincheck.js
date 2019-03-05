@@ -17,4 +17,7 @@ function check_user() {
     flashBox.style.display = "none"
     boxCTL.style.display = "block"
   }
+  setTimeout(() => {
+    check_user()
+  }, 2000)
 }
