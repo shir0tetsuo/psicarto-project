@@ -119,6 +119,7 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
+  ////////// BROKEN: Null object cannot be detected?
   if (request.cookies == null) {
     response.redirect("/pc")
     return
