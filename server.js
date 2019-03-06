@@ -155,7 +155,7 @@ sys.post('/pc/login',function(req,res){
   } else if (key.length !== 0 && idnumber.length == 0) {
     // THIS IF STATEMENT below should come AFTER a database check!
     if (axis[key] !== undefined) {
-      var fsAAA = GenerateCookie(req, res, axis[key], axis) // CreateNavigator(req, res)
+      var fsAAA = '' // CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'key')
       var fsAAC = ''
       var fsTRAIL = ''
