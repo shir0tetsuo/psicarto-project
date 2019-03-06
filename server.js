@@ -11,9 +11,7 @@ console.log('Part A')
 const firebase = require('firebase').initializeApp({
   serviceAccount: "./service-account.json",
   databaseURL: "https://sabre-quantum-1.firebaseio.com"
-}).catch(err) {
-  console.log('error!!')
-}
+}).catch()
 console.log('Part B')
 const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
@@ -21,7 +19,7 @@ const client = new Discord.Client(); // discord client
 let timer = new Set();
 var axis = new Object();
 var message = {text: 'Hello, World!', timestamp: new Date().toString()};
-var ref = firebase.database().ref().child('quantum1');
+var ref = firebase.database().ref('/pc-user');
 var logRef = ref.child('logs')
 var messagesRef = messagesRef.push(message)
 ref.once('value').then(function(snap) {
