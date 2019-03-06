@@ -120,7 +120,7 @@ sys.get('/pc/base', (request, response) => {
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
   const LoginRedirect = fs.readFileSync('pages/301.html')
-  if (request.cookies == null) {
+  if (request.cookies[0] == null) {
     response.send(LoginRedirect)
     return
   } else {
