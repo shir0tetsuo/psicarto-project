@@ -54,7 +54,6 @@ function AccessSQL(request, response, Properties) { // This needs to wait till I
 }
 
 function GenerateCookie(key) {
-  var
   var machine = '<!-- GenerateCookie('+axis[key]+') -->\n'; // prints the UID
   machine += '<script type="text/javascript">'
   const dateData = new Date();
