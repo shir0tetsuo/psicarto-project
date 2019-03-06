@@ -120,7 +120,8 @@ sys.get('/pc/base', (request, response) => {
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
   if (request.cookies[0] == null) {
-    var res = fs.readFileSync('pages/301.html')
+    response.redirect("/pc")
+    return
   } else {
     var res = 'Hello, World!'
   }
