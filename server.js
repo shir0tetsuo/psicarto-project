@@ -23,7 +23,7 @@ let timer = new Set();
 var axis = new Object();
 
 
-var ref = fire.app().database().ref().child('pc-login');
+var ref = fire.database().ref().child('pc-login');
 ref.once('value').then(function(snap) {
   console.log('snap.val()', snap.val())
 })
