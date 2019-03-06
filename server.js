@@ -116,6 +116,10 @@ sys.use(express.static('public'))
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
+sys.use(function (req, res, next) {
+  res.status(404).send(fs.readFileSync('pages/404.html'))
+})
+
 sys.get('/pc', (request, response) => {
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
@@ -123,15 +127,7 @@ sys.get('/pc', (request, response) => {
 
   const GumGum = fsHEAD + fsAAA + fsTRAIL
   //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
-  if (response.status(404) == true) {
-    response.send(fs.readFileSync('pages/404.html'))
-  } else if (response.status(200) == true) {
-    response.send(GumGum)
-  } else if (response.status(301) == true) {
-    response.send(GumGum)
-  } else {
-    response.send(GumGum)
-  }
+  response.send(GumGum)
 })
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
