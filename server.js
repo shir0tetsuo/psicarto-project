@@ -117,17 +117,13 @@ sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
-  if (response.status(404)) {
-    response.send('<style type="text/css">body { background-color: #2f3136; color: #789496; }</style><h1>Oh. This resource is inaccessible.</h1>')
-  } else {
-    const fsHEAD = fs.readFileSync('pages/head.html')
-    const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
-    var fsTRAIL = fs.readFileSync('pages/trail.html')
+  const fsHEAD = fs.readFileSync('pages/head.html')
+  const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
+  var fsTRAIL = fs.readFileSync('pages/trail.html')
 
-    const GumGum = fsHEAD + fsAAA + fsTRAIL
-    //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
-    response.send(GumGum)
-  }
+  const GumGum = fsHEAD + fsAAA + fsTRAIL
+  //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
+  response.send(GumGum)
 })
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
