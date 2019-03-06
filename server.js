@@ -12,8 +12,6 @@ const client = new Discord.Client(); // discord client
 let timer = new Set();
 
 var axis = new Object();
-// axis[idnum] = [token]
-
 
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
@@ -26,32 +24,6 @@ var axis = new Object();
 
 //const sql = require("sqlite");
 //sql.open("../sql/pc.sqlite");
-
-function AccessSQL(request, response, Properties) { // This needs to wait till I import cookies
-  /*if (type === "lv") {
-    setTimeout(() => {
-      sql.get(`SELECT * FROM scores WHERE userId = "${uid.id}"`).then(r => {
-        if (!r) {
-          console.log(chalk.redBright("RECOVERY =>"), chalk.blueBright(`Table Creation.`))
-          sql.run(`INSERT INTO scores (userId, tickets, level, chatBits) VALUES (?, ?, ?, ?)`, [uid.id, 1, value * 1, 1]);
-          return;
-        } else {
-          if (r.level * 1 <= -1) {
-            sql.run(`UPDATE scores SET level = "${value*1}" WHERE userId = "${uid.id}"`)
-          } else {
-            sql.run(`UPDATE scores SET level = "${r.level*1 + value*1}" WHERE userId = "${uid.id}"`)
-          }
-        }
-      }).catch(() => {
-        console.error;
-        console.log(chalk.redBright("RECOVERY =>"), chalk.greenBright(`Database Creaction.`))
-        sql.run(`CREATE TABLE IF NOT EXISTS scores (userId TEXT, tickets INTEGER, level INTEGER, chatBits INTEGER)`).then(() => {
-          sql.run(`INSERT INTO scores (userId, tickets, level, chatBits)`, [uid.id, 1, value * 1, 1]);
-        })
-      })
-    }, 2000)
-  }*/
-}
 
 function GenerateCookie(key) {
   console.log("Generating cookie.")
@@ -105,7 +77,6 @@ function GenerateAuthKey(uid) {
       timestamp: new Date()
     }})
     return fs.readFileSync('pages/lcheck.html')
-    // ADD Cookie with uid and token
     // ADD Dictionary: uid = token
   } else {
     return fs.readFileSync('pages/NoUserFound.html')
