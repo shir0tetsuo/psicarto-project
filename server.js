@@ -124,6 +124,9 @@ sys.get('/pc', (request, response) => {
   const GumGum = fsHEAD + fsAAA + fsTRAIL
   //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
   response.send(GumGum)
+}
+catch(){
+  response.send('Error')
 })
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
