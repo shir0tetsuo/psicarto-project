@@ -176,7 +176,8 @@ client.on("message", message => {
 })
 
 sys.use(function (req, res, next) {
-  res.status(404).send("The resource you are attempting to access is unavailable.")
+  var axdead = fs.readFileSync('pages/404.html')
+  res.status(404).send(axdead)
 })
 //test
 
