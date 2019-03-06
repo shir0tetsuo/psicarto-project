@@ -118,10 +118,7 @@ sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
   if (response.status(404)) {
-    console.log('404 hit')
-    var axDead = fs.readFileSync('pages/404.html')
-    response.send(axDead)
-    return
+    response.send('<style type="text/css">body { background-color: #2f3136; color: #789496; }</style><h1>Oh. This resource is inaccessible.</h1>')
   } else {
     const fsHEAD = fs.readFileSync('pages/head.html')
     const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
