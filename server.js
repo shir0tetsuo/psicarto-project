@@ -54,12 +54,13 @@ function AccessSQL(request, response, Properties) { // This needs to wait till I
 }
 
 function GenerateCookie(key) {
-  var machine = '<!-- GenerateCookie('+axis[key]+') -->\n'; // prints the UID
+  console.log("Generating cookie.")
+  var machine = '';
   machine += '<script type="text/javascript">'
   const dateData = new Date();
   dateData.setHours(dateData.getHours() + 3)
   // Can possibly handle and skip the PC login process and head to the new page.
-  machine += 'document.cookie = '+key+'='+axis[key]+'; path="/pc"; Secure; expires='+dateData.toUTCString()+';';
+  machine += `document.cookie = ${key}=${axis[key]}; path="/pc"; Secure; expires=${dateData.toUTCString()};`;
   machine += '\n'
   machine += '</script>'
   return machine
