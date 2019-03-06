@@ -7,12 +7,24 @@ const chalk = require('chalk')
 const express = require('express')
 const sys = express()
 const path = require('path')
+const Fire = require('firebase')
 const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 let timer = new Set();
-
 var axis = new Object();
+
+Fire.initializeApp({
+  "appName": "psicarto",
+  "serviceAccount": "./service-account.json",
+  "authDomain": "sabre-quantum-1.firebaseapp.com",
+  "databaseURL": "https://sabre-quantum-1.firebaseio.com",
+  "storageBucket": "sabre-quantum-1.appspot.com",
+})
+var ref = Fire.app().database().ref();
+ref.once('value').then(function(snap) {
+  console.log('snap.val()', snap.val())
+})
 
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
@@ -115,6 +127,7 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
+  //for x in request.cookies ...
   response.send('Hello, World!')
 })
 // TODO: Test idnumber against key, add database

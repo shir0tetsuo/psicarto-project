@@ -4,3 +4,4 @@ ui/
 public/vendor/
 desktop.ini
 settings.json
+service-account.json
