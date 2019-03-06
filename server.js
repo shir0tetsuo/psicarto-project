@@ -53,13 +53,14 @@ function AccessSQL(request, response, Properties) { // This needs to wait till I
   }*/
 }
 
-function GenerateCookie(req, res, axs, axis) {
-  var machine = '<!-- GenerateCookie('+axs+') -->\n';
+function GenerateCookie(key) {
+  var
+  var machine = '<!-- GenerateCookie('+axis[key]+') -->\n'; // prints the UID
   machine += '<script type="text/javascript">'
   const dateData = new Date();
   dateData.setHours(dateData.getHours() + 3)
   // Can possibly handle and skip the PC login process and head to the new page.
-  machine += 'document.cookie = '+axs+'='+axis[axs]+'; path="/pc"; Secure; expires='+dateData.toUTCString();
+  machine += 'document.cookie = '+key+'='+axis[key]+'; path="/pc"; Secure; expires='+dateData.toUTCString()+';';
   machine += '\n'
   machine += '</script>'
   return machine
@@ -155,7 +156,7 @@ sys.post('/pc/login',function(req,res){
   } else if (key.length !== 0 && idnumber.length == 0) {
     // THIS IF STATEMENT below should come AFTER a database check!
     if (axis[key] !== undefined) {
-      var fsAAA = '' // CreateNavigator(req, res)
+      var fsAAA = GenerateCookie(key) // CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'key')
       var fsAAC = ''
       var fsTRAIL = ''
