@@ -109,6 +109,9 @@ sys.get('/pc', (request, response) => {
   //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
   response.send(GumGum)
 })
+sys.get('/pc/base', (request, response) => {
+  response.send('Hello, World!')
+})
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
   var idnumber=req.body.idnumber;
