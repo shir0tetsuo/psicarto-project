@@ -121,6 +121,7 @@ sys.get('/pc/base', (request, response) => {
   console.log(request.cookies)
   var LoginRedirect = fs.readFileSync('pages/301.html')
   if (request.cookies[0] == null) {
+    response.set('Content-Type', 'text/html')
     response.send(LoginRedirect)
     return
   } else {
