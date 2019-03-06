@@ -53,6 +53,18 @@ function AccessSQL(request, response, Properties) { // This needs to wait till I
   }*/
 }
 
+function GenerateCookie(req, res, axs, axis) {
+  var machine = '<!-- GenerateCookie('+axs+') -->\n';
+  machine += '<script type="text/javascript">'
+  const dateData = new Date();
+  dateData.setHours(dateData.getHours() + 3)
+  // Can possibly handle and skip the PC login process and head to the new page.
+  machine += 'document.cookie = '+axs+'='+axis[axs]+'; path="/pc"; Secure; expires='+dateData.toUTCString();
+  machine += '\n'
+  machine += '</script>'
+  return machine
+}
+
 function Cryptographic(xlen) {
   if (!xlen) var xlen = 1
     var charset = "0123456789XYACD+-Oo.eE=/Z",
@@ -143,10 +155,10 @@ sys.post('/pc/login',function(req,res){
   } else if (key.length !== 0 && idnumber.length == 0) {
     // THIS IF STATEMENT below should come AFTER a database check!
     if (axis[key] !== undefined) {
-      var fsAAA = '' // CreateNavigator(req, res)
+      var fsAAA = GenerateCookie(req, res, axis[key], axis) // CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'key')
       var fsAAC = ''
-      var fsTRAIL = '</body></html>'
+      var fsTRAIL = ''
     } else {
       var fsAAA = CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'nokey')
