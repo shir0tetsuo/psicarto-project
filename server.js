@@ -119,13 +119,13 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
-  if (request.cookies[0] == null) {
+  if (request.cookies == null) {
     response.redirect("/pc")
     return
   } else {
-    var res = 'Hello, World!'
+    response.send('Hello, World!')
+    return
   }
-  response.send(res)
   //for x in request.cookies ...
 });
 // TODO: Test idnumber against key, add database
