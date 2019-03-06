@@ -11,7 +11,7 @@ console.log('Part A')
 const firebase = require('firebase').initializeApp({
   serviceAccount: "./service-account.json",
   databaseURL: "https://sabre-quantum-1.firebaseio.com"
-}).catch()
+})
 console.log('Part B')
 const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
