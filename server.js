@@ -121,6 +121,7 @@ sys.get('/pc', (request, response) => {
     console.log('404 hit')
     var axDead = fs.readFileSync('pages/404.html')
     response.send(axDead)
+    return
   } else {
     const fsHEAD = fs.readFileSync('pages/head.html')
     const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
