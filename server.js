@@ -119,8 +119,8 @@ sys.use(bodyParser.json()); // allow POST callback
 sys.get('/pc', (request, response) => {
   if (response.status(404)) {
     console.log('404 hit')
-    ax404 = fs.readFileSync('pages/404.html')
-    response.send('bang')
+    var axDead = fs.readFileSync('pages/404.html')
+    response.send(axDead)
   } else {
     const fsHEAD = fs.readFileSync('pages/head.html')
     const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
