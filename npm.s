@@ -44,6 +44,7 @@ npm install --save-dev firebase
 npm install --save firebase-admin
 #npm install --save sqlite3 #database
 #npm install --save chess.js
+npm install grpc
 #cp /node/BAK/node_modules/sqlite -r /root/NC/utils/NorthStar/sabre.discord.js/node_modules/
 echo Done
 
