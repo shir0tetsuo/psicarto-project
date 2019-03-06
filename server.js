@@ -20,7 +20,7 @@ let timer = new Set();
 var axis = new Object();
 var message = {text: 'Hello, World!', timestamp: new Date().toString()};
 var ref = firebase.database().ref('/pc-user');
-var logRef = ref.child('logs')
+var logsRef = ref.child('logs')
 var messagesRef = ref.child('messages')
 var messageRef = messagesRef.push(message)
 ref.once('value').then(function(snap) {
