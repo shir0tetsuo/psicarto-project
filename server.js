@@ -176,7 +176,7 @@ client.on("message", message => {
 })
 
 sys.use(function (req, res, next) {
-  res.status(404).send("Shit")
+  res.status(404).send("The resource you are attempting to access is unavailable.")
 })
 //test
 
