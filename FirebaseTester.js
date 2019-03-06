@@ -11,13 +11,13 @@ var db = admin.firestore();
 // CREATE
 var userId = "111111111111111111";
 var docRef = db.collection('pc-user').doc(userId);
-
+console.log('14')
 // MODIFY
 var setAda = docRef.set({
   key: 'XxqQAaBB',
   banned: false
 });
-
+console.log('20')
 // READ
 db.collection('pc-users').get()
   .then((snapshot) => {
@@ -28,3 +28,4 @@ db.collection('pc-users').get()
   .catch((err) => {
     console.log('Error getting documents', err);
   });
+console.log('31')
