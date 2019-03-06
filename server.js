@@ -118,6 +118,7 @@ sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
   if (response.status(404)) {
+    console.log('404 hit')
     ax404 = fs.readFileSync('pages/404.html')
     response.send(ax404)
   } else {
