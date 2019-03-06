@@ -116,10 +116,6 @@ sys.use(express.static('public'))
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
-sys.use(function (req, res, next) {
-  res.status(404).send("Shit")
-})
-
 sys.get('/pc', (request, response) => {
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
@@ -177,6 +173,10 @@ client.on("message", message => {
   if (message.isMentioned(client.user.id)) {
     message.author.send("Please go to https://shadowsword.tk/pc and enter "+message.author.id+" as your Discord ID")
   }
+})
+
+sys.use(function (req, res, next) {
+  res.status(404).send("Shit")
 })
 
 sys.listen(2600, () => {
