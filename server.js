@@ -118,7 +118,7 @@ sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
   if (response.status(404)) {
-    return response.send('BROKEN')
+    return response.send(fs.readFileSync('pages/404.html'))
   }
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
