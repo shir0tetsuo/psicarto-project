@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const express = require('express')
 const sys = express()
 const path = require('path')
+const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 let timer = new Set();
@@ -97,6 +98,7 @@ function CreateResponse(request, response, handle) {
 }
 
 sys.use(express.static('public'))
+sys.use(Cp())
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
@@ -110,6 +112,9 @@ sys.get('/pc', (request, response) => {
   response.send(GumGum)
 })
 sys.get('/pc/base', (request, response) => {
+  // Connect to database here. Use cookie parser here.
+  // if (cookie[database] !== undefined) .. else { response.send() }
+  console.log(request.cookies)
   response.send('Hello, World!')
 })
 // TODO: Test idnumber against key, add database
