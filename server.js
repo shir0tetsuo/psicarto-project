@@ -117,7 +117,7 @@ sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
 sys.use(function (req, res, next) {
-  res.status(404).send(fs.readFileSync('pages/404.html'))
+  res.status(404).send("Shit")
 })
 
 sys.get('/pc', (request, response) => {
