@@ -11,7 +11,7 @@ function check_user() {
     boxCTL.style.display = "none"
   } else if (idnum.value.length == 0 && key.value.length == 0) {
     flashBox.style.display = "block"
-    flashMSG.innerHTML = "Please enter a Discord ID or Auth Key<br>Your Auth Key should be a unique ID submitted to you via DMs"
+    flashMSG.innerHTML = "Please enter a Discord ID or Auth Key<br>Your Auth Key should be a unique token submitted to you via DMs via the Spirito Bot.<br>You can mention the Spirito Bot to give you your Discord ID if you don't have developer tools enabled."
     boxCTL.style.display = "none"
   } else {
     flashBox.style.display = "none"
