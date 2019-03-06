@@ -127,7 +127,6 @@ sys.get('/pc/base', (request, response) => {
     response.send('Hello, World!')
   }
   //for x in request.cookies ...
-  response.send('Hello, World!')
 });
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
