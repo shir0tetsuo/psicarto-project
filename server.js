@@ -178,8 +178,8 @@ client.on("message", message => {
 sys.use(function (req, res, next) {
   var axdead = '';
   axdead += '<!DOCTYPE html>\n'
-  axdead += '<html><head><link rel="stylesheet" href="/pc/css/main.css"></head>\n'
-  axdead += '<h1><yellow>Oh.</yellow></h1><tilde>The resource you are attempting to access is unavailable. <a href="/pc">Return</a></tilde>'
+  axdead += '<html><head><link rel="stylesheet" href="/pc/css/main.css"></head><body>\n'
+  axdead += '<h1><yellow>Oh.</yellow></h1><tilde>The resource you are attempting to access is unavailable. <a href="/pc">Return</a></tilde></body></html>'
   res.status(404).send(axdead)
 })
 //test
