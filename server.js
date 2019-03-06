@@ -176,7 +176,10 @@ client.on("message", message => {
 })
 
 sys.use(function (req, res, next) {
-  var axdead = fs.readFileSync('pages/404.html')
+  var axdead = '';
+  axdead += '<!DOCTYPE html>\n'
+  axdead += '<html><head><link rel="stylesheet" href="/pc/css/main.css"></head>\n'
+  axdead += '<h1><yellow>Oh.</yellow></h1><tilde>The resource you are attempting to access is unavailable.</tilde>'
   res.status(404).send(axdead)
 })
 //test
