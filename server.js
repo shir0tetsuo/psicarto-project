@@ -118,15 +118,17 @@ sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
   if (response.status(404)) {
-    return response.send(fs.readFileSync('pages/404.html'))
-  }
-  const fsHEAD = fs.readFileSync('pages/head.html')
-  const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
-  var fsTRAIL = fs.readFileSync('pages/trail.html')
+    ax404 = fs.readFileSync('pages/404.html')
+    response.send(ax404)
+  } else {
+    const fsHEAD = fs.readFileSync('pages/head.html')
+    const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
+    var fsTRAIL = fs.readFileSync('pages/trail.html')
 
-  const GumGum = fsHEAD + fsAAA + fsTRAIL
-  //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
-  response.send(GumGum)
+    const GumGum = fsHEAD + fsAAA + fsTRAIL
+    //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
+    response.send(GumGum)
+  }
 })
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
