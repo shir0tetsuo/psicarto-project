@@ -18,8 +18,6 @@ const admin = require('firebase-admin');
 var svcAcc = require('./service-account.json');
 admin.initializeApp({
   credential: admin.credential.cert(svcAcc)
-}).then(() => {
-  console.log("Connected to Firebase Server")
 })
 
 var db = admin.firestore();
