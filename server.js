@@ -119,6 +119,13 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
+  const LoginRedirect = fs.readFileSync('pages/301.html')
+  if (request.cookies == undefined) {
+    response.send(LoginRedirect)
+    return
+  } else {
+    response.send('Hello, World!')
+  }
   //for x in request.cookies ...
   response.send('Hello, World!')
 });
