@@ -60,7 +60,7 @@ function GenerateCookie(key) {
   const dateData = new Date();
   dateData.setHours(dateData.getHours() + 3)
   // Can possibly handle and skip the PC login process and head to the new page.
-  machine += `document.cookie = '${key}'='${axis[key]}'; path="/pc"; Secure; expires=${dateData.toUTCString()};`;
+  machine += `document.cookie = '${key}=${axis[key]}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
   machine += '\n'
   machine += '</script>'
   return machine
