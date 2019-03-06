@@ -7,40 +7,13 @@ const chalk = require('chalk')
 const express = require('express')
 const sys = express()
 const path = require('path')
-console.log('Part A')
-const firebase = require('firebase').initializeApp({
-  serviceAccount: "./service-account.json",
-  databaseURL: "https://sabre-quantum-1.firebaseio.com"
-})
-console.log('Part B')
+
 const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 let timer = new Set();
 var axis = new Object();
-var message = {text: 'Hello, World!', timestamp: new Date().toString()};
-var ref = firebase.database().ref('pc-user');
-var logsRef = ref.child('logs')
-var messagesRef = ref.child('messages')
-var messageRef = messagesRef.push(message)
-ref.once('value').then(function(snap) {
-  console.log('snap.val()', snap.val())
-})
-logsRef.child(messagesRef.key).set(message);
 
-logsRef.orderByKey().limitToLast(1).on('child_added', function(snap) {
-  console.log('added', snap.val());
-})
-logsRef.on('child_removed', function(snap) {
-  console.log('removed', snap.val());
-})
-ref.child('logs').on('child_changed', function(snap) {
-  console.log('changed', snap.val())
-})
-ref.child('logs').on('value', function(snap) {
-  console.log('value', snap.val())
-})
-console.log('Part C')
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
 // If dictionary returns true then export that [#] out to database.
