@@ -9,7 +9,6 @@ const sys = express()
 const path = require('path')
 console.log('Part A')
 const fire = require('firebase').initializeApp({
-  "appName": "psicarto",
   "serviceAccount": "service-account.json",
   "authDomain": "sabre-quantum-1.firebaseapp.com",
   "databaseURL": "https://sabre-quantum-1.firebaseio.com",
@@ -23,7 +22,7 @@ let timer = new Set();
 var axis = new Object();
 
 
-var ref = fire.database().ref('pc-login');
+var ref = fire.database().ref('pc-engine-2');
 ref.once('value').then(function(snap) {
   console.log('snap.val()', snap.val())
 })
