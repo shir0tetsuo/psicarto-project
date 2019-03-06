@@ -14,6 +14,16 @@ const client = new Discord.Client(); // discord client
 let timer = new Set();
 var axis = new Object();
 
+const admin = require('firebase-admin');
+var svcAcc = require('./service-account.json');
+admin.initializeApp({
+  credential: admin.credential.cert(svcAcc)
+}).then(() => {
+  console.log("Connected to Firebase Server")
+})
+
+var db = admin.firestore();
+
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
 // If dictionary returns true then export that [#] out to database.
@@ -26,6 +36,14 @@ var axis = new Object();
 //const sql = require("sqlite");
 //sql.open("../sql/pc.sqlite");
 
+function newCredentials(axis, key) {
+  var docRef = db.collection('pc-user').doc(axis[key]);
+  var setAda = docRef.set({
+    key: key,
+    banned: false
+  })
+}
+
 function GenerateCookie(key) {
   console.log("Generating cookie.")
   var machine = '';
@@ -36,6 +54,7 @@ function GenerateCookie(key) {
   machine += `document.cookie = '${axis[key]}=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
   machine += '\n'
   machine += '</script>'
+  newCredentials(axis, key)
   return machine
 }
 
@@ -120,6 +139,7 @@ sys.get('/pc/base', (request, response) => {
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
   ////////// BROKEN: Null object cannot be detected?
+  // Cross ref with database
   if (request.cookies == null) {
     response.redirect("/pc")
     return
