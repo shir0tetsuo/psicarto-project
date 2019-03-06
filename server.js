@@ -7,25 +7,27 @@ const chalk = require('chalk')
 const express = require('express')
 const sys = express()
 const path = require('path')
-const Fire = require('firebase')
+console.log('Part A')
+const fire = require('firebase').initializeApp({
+  "appName": "psicarto",
+  "serviceAccount": "service-account.json",
+  "authDomain": "sabre-quantum-1.firebaseapp.com",
+  "databaseURL": "https://sabre-quantum-1.firebaseio.com",
+  "storageBucket": "sabre-quantum-1.appspot.com",
+})
+console.log('Part B')
 const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
 let timer = new Set();
 var axis = new Object();
 
-Fire.initializeApp({
-  "appName": "psicarto",
-  "serviceAccount": "./service-account.json",
-  "authDomain": "sabre-quantum-1.firebaseapp.com",
-  "databaseURL": "https://sabre-quantum-1.firebaseio.com",
-  "storageBucket": "sabre-quantum-1.appspot.com",
-})
-var ref = Fire.app().database().ref();
+
+var ref = fire.app().database().ref().child('pc-login');
 ref.once('value').then(function(snap) {
   console.log('snap.val()', snap.val())
 })
-
+console.log('Part C')
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
 // If dictionary returns true then export that [#] out to database.
