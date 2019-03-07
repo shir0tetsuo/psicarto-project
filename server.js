@@ -162,8 +162,7 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   var user = [{key: request.cookies.key, uid: request.cookies.uid}];
-  timeoutPage = fs.readFileSync('pages/301.html'),
-  checkSES = CkSES(user);
+  var checkSES = CkSES(user);
   if (checkSES == "grant") {
     response.send('Hello, World!')
     return;
@@ -171,9 +170,7 @@ sys.get('/pc/base', (request, response) => {
   } else if (checkSES == undefined) {
     userLOGOUT(request, response);
   } else {
-    setTimeout(() => {
-      response.send(timeoutPage)
-    }, 5000)
+    console.log('error')
   }
 });
 // TODO: Test idnumber against key, add database
