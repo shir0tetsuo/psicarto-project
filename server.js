@@ -49,7 +49,7 @@ function CkSES(userKey, userUID) {
     snapshot.forEach((doc) => {
       //console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
       var trueId = parseInt(doc.id);
-      var testId = parseInt(userID);
+      var testId = parseInt(userUID);
       if (trueId = testId) {
         if (doc._fieldsProto.key.stringValue = userKey) {
           return "grant"
