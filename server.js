@@ -140,6 +140,7 @@ sys.get('/pc/base', (request, response) => {
   console.log(request.cookies)
   ////////// BROKEN: Null object cannot be detected?
   // Cross ref with database
+  //db.collection('pc-user')
   if (request.cookies == null) {
     response.redirect("/pc")
     return

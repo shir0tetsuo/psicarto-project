@@ -19,7 +19,7 @@ var setAda = docRef.set({
 });
 console.log('20')
 // READ
-db.collection('pc-users').get()
+db.collection('pc-user').get()
   .then((snapshot) => {
     snapshot.forEach((doc) => {
       console.log(doc.id, '=>', doc.data());
