@@ -44,6 +44,21 @@ function newCredentials(axis, key) {
   })
 }
 
+function checkData(req, res) {
+  db.collection('pc-user').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      console.log(doc._fieldsProto.key.stringValue)
+      if (doc._fieldsProto.key.stringValue == req.cookies.key) {
+        console.log('KEY OK')
+        if (doc.id == req.cookies.uid) {
+          console.log('UID OK')
+          return true;
+        }
+      }
+    })
+  })
+}
+
 function GenerateCookie(key) {
   console.log("Generating cookie.")
   var machine = '';
@@ -51,7 +66,7 @@ function GenerateCookie(key) {
   const dateData = new Date();
   dateData.setHours(dateData.getHours() + 3)
   // Can possibly handle and skip the PC login process and head to the new page.
-  machine += `document.cookie = '${axis[key]}=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
+  machine += `document.cookie = 'uid=${axis[key]}; key=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
   machine += '\n'
   machine += '</script>'
   newCredentials(axis, key)
@@ -141,12 +156,11 @@ sys.get('/pc/base', (request, response) => {
   ////////// BROKEN: Null object cannot be detected?
   // Cross ref with database
   //db.collection('pc-user')
-  if (request.cookies == null) {
+  var dataPokk = checkData(request, response);
+  if (!dataPokk) {
     response.redirect("/pc")
-    return
   } else {
     response.send('Hello, World!')
-    return
   }
   //for x in request.cookies ...
 });
