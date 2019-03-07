@@ -47,6 +47,7 @@ function newCredentials(axis, key) {
 function CkSES(user) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
+      console.log(doc.id, user.uid, doc._fieldsProto.key.stringValue, user.key)
       var docID = doc.id,
       docKEY = doc._fieldsProto.key.stringValue,
       masUID = user.uid,
