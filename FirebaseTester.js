@@ -22,7 +22,7 @@ console.log('20')
 db.collection('pc-user').get()
   .then((snapshot) => {
     snapshot.forEach((doc) => {
-      if (!doc.data.key) {
+      if (!doc.data('key')) {
         console.log("SKIP")
       } else if (doc.data.key == 'XxqQAaBB') {
         console.log("HIT///////////")
