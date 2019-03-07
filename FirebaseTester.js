@@ -19,15 +19,12 @@ var setAda = docRef.set({
 });
 console.log('20')
 // READ
-db.collection('pc-user').get()
-  .then((snapshot) => {
+db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
-      var docDataVal = doc.key
-      console.log(docDataVal)
+      console.log(doc.id.key)
       console.log(doc.id, '=>', doc.data());
     });
-  })
-  .catch((err) => {
+  }).catch((err) => {
     console.log('Error getting documents', err);
   });
 console.log('31')
