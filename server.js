@@ -153,7 +153,6 @@ sys.get('/pc', (request, response) => {
 })
 function userLOGOUT(request, response) {
   returnPage = fs.readFileSync('pages/301.html')
-  response.clearCookie();
   response.send(returnPage);
   //response.redirect('/pc');
   return;
