@@ -181,6 +181,8 @@ sys.post('/pc/login',function(req,res){
     var fsTRAIL = fs.readFileSync('pages/trail.html')
   } else if (key.length !== 0 && idnumber.length == 0) {
     // THIS IF STATEMENT below should come AFTER a database check!
+    // CHECK DATABASE for this key and associate a user to it.
+    // OTHERWISE check for a cookie.
     if (axis[key] !== undefined) {
       var fsAAA = GenerateCookie(key) // CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'key')
