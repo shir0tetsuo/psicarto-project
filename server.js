@@ -47,16 +47,16 @@ function newCredentials(axis, key) {
 function CkSES(user) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
-      if (doc.id == user.uid && doc._fieldsProto.key.stringValue == user.key) {
-        // Gotta have a system to check bans at some point .....
-        console.log('GRANTED')
-        return "grant"
-      } else {
-        console.log('SKIP FOUND => ', doc.id, doc._fieldsProto.key.stringValue, '=', user)
+      var docID = doc.id,
+      docKEY = doc._fieldsProto.key.stringValue,
+      masUID = user.uid,
+      masKEY = user.key;
+      if (docID = masUID) {
+        if (docKEY = masKEY) {
+          return "grant"
+        }
       }
     })
-    console.log(user)
-    return "deny"
   })
 }
 
@@ -166,8 +166,9 @@ sys.get('/pc/base', (request, response) => {
   checkSES = CkSES(user);
   if (checkSES == "grant") {
     response.send('Hello, World!')
+    return;
     // Do other stuff???
-  } else if (checkSES == "deny") {
+  } else if (checkSES == undefined) {
     userLOGOUT(request, response);
   } else {
     setTimeout(() => {
