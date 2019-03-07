@@ -48,18 +48,14 @@ function CkSES(userKey, userUID) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
-      var docID = doc.id;
-      var docKEY = doc._fieldsProto.key.stringValue;
-      var masUID = userUID;
-      var masKEY = userKey;
-      if (docID = masUID) {
-        if (docKEY = masKEY) {
+      if (doc.id = userUID) {
+        if (doc._fieldsProto.key.stringValue = userKey) {
           return "grant"
         } else {
-          console.log('tier2 fail =>', docKEY, masKEY)
+          console.log('tier2 fail =>', doc._fieldsProto.key.stringValue, userKey)
         }
       } else {
-        console.log('tier1 fail =>', docID, masUID)
+        console.log('tier1 fail =>', doc.id, userUID)
       }
     })
   })
