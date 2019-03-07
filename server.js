@@ -66,7 +66,9 @@ function GenerateCookie(key) {
   const dateData = new Date();
   dateData.setHours(dateData.getHours() + 3)
   // Can possibly handle and skip the PC login process and head to the new page.
-  machine += `document.cookie = 'uid=${axis[key]}; key=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
+  machine += `document.cookie = 'uid=${axis[key]}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
+  machine += '\n'
+  machine += `document.cookie = 'key=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
   machine += '\n'
   machine += '</script>'
   newCredentials(axis, key)
@@ -156,12 +158,15 @@ sys.get('/pc/base', (request, response) => {
   ////////// BROKEN: Null object cannot be detected?
   // Cross ref with database
   //db.collection('pc-user')
+  /*
   var dataPokk = checkData(request, response);
   if (!dataPokk) {
     response.redirect("/pc")
   } else {
     response.send('Hello, World!')
   }
+  */
+  response.send('Hello, World!')
   //for x in request.cookies ...
 });
 // TODO: Test idnumber against key, add database
