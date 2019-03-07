@@ -47,7 +47,7 @@ function newCredentials(axis, key) {
 function CkSES(userKey, userUID) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
-      console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
+      //console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
       if (doc.id = userUID) {
         if (doc._fieldsProto.key.stringValue = userKey) {
           return "grant"
