@@ -54,7 +54,11 @@ function CkSES(user) {
       if (docID = masUID) {
         if (docKEY = masKEY) {
           return "grant"
+        } else {
+          console.log('tier2 fail =>', docKEY, masKEY)
         }
+      } else {
+        console.log('tier1 fail =>', docID, masUID)
       }
     })
   })
