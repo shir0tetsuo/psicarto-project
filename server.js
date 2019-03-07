@@ -7,21 +7,23 @@ const chalk = require('chalk')
 const express = require('express')
 const sys = express()
 const path = require('path')
-
 const Cp = require('cookie-parser')
 const Discord = require ("discord.js"); // discord client
 const client = new Discord.Client(); // discord client
+
+
 let timer = new Set();
 var axis = new Object();
 
+
+// FIREBASE
 const admin = require('firebase-admin');
-var svcAcc = require('./service-account.json');
+var svcAcc = require('./service-account.json'); // Purposely excluded from Github
 admin.initializeApp({
   credential: admin.credential.cert(svcAcc)
 })
-
 var db = admin.firestore();
-
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 // Create dictionary: user ID + authorization token
 // At database creation (when user enters auth) search Dictionary,
 // If dictionary returns true then export that [#] out to database.
@@ -33,7 +35,7 @@ var db = admin.firestore();
 
 //const sql = require("sqlite");
 //sql.open("../sql/pc.sqlite");
-
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function newCredentials(axis, key) {
   var docRef = db.collection('pc-user').doc(axis[key]);
   var setAda = docRef.set({
@@ -113,7 +115,7 @@ function CreateResponse(request, response, handle) {
   if (handle == 'nokey') return fs.readFileSync('pages/nokey.html');
   if (handle == 'key') return fs.readFileSync('pages/Kcheck.html')
 }
-
+////////////////////////////////////////////////////////////////////////////////
 sys.use(express.static('public'))
 sys.use(Cp())
 sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
