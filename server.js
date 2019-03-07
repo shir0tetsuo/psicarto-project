@@ -49,11 +49,14 @@ function CkSES(user) {
     snapshot.forEach((doc) => {
       if (doc.id == user.uid && doc._fieldsProto.key.stringValue == user.key) {
         // Gotta have a system to check bans at some point .....
+        console.log('GRANTED')
         return "grant"
       } else {
-        return "deny"
+        console.log('SKIP FOUND => ', doc.id, doc._fieldsProto.key.stringValue, '=', user)
       }
     })
+    console.log(user)
+    return "deny"
   })
 }
 
