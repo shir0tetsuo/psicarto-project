@@ -44,16 +44,14 @@ function newCredentials(axis, key) {
   })
 }
 
-function checkData(req, res) {
+function CkSES(user) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
-      console.log(doc._fieldsProto.key.stringValue)
-      if (doc._fieldsProto.key.stringValue == req.cookies.key) {
-        console.log('KEY OK')
-        if (doc.id == req.cookies.uid) {
-          console.log('UID OK')
-          return true;
-        }
+      if (doc.id == user.uid && doc._fieldsProto.key.stringValue == user.key) {
+        // Gotta have a system to check bans at some point .....
+        return "grant"
+      } else {
+        return "deny"
       }
     })
   })
@@ -147,29 +145,34 @@ sys.get('/pc', (request, response) => {
   //response.sendFile(path.resolve(__dirname, 'pages/index.html'))
   response.send(GumGum)
 })
-sys.get('/pc/logout', function(request, response) {
+function userLOGOUT(request, response) {
+  returnPage = fs.readFileSync('pages/301.html')
   response.clearCookie();
-  response.send('CLEARED')
+  response.send(returnPage);
+  //response.redirect('/pc');
+  return;
+}
+sys.get('/pc/logout', function(request, response) {
+  userLOGOUT(request, response);
 });
 sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
-  console.log(request.cookies)
-  console.log(request.cookies.uid)
-  console.log(request.cookies.key)
-  ////////// BROKEN: Null object cannot be detected?
-  // Cross ref with database
-  //db.collection('pc-user')
-  /*
-  var dataPokk = checkData(request, response);
-  if (!dataPokk) {
-    response.redirect("/pc")
-  } else {
+  var user = '';
+  var user.uid = request.cookies.uid,
+  user.key = request.cookies.key,
+  timeoutPage = fs.readFileSync('pages/301.html'),
+  checkSES = CkSES(user);
+  if (checkSES == "grant") {
     response.send('Hello, World!')
+    // Do other stuff???
+  } else if (checkSES == "deny") {
+    userLOGOUT(request, response);
+  } else {
+    setTimeout(() => {
+      response.send(timeoutPage)
+    }, 5000)
   }
-  */
-  response.send('Hello, World!')
-  //for x in request.cookies ...
 });
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
@@ -187,6 +190,7 @@ sys.post('/pc/login',function(req,res){
     var fsAAB = CreateResponse(req, res, 'idnum')
     var fsTRAIL = fs.readFileSync('pages/trail.html')
   } else if (key.length !== 0 && idnumber.length == 0) {
+    //// TODO
     // THIS IF STATEMENT below should come AFTER a database check!
     // CHECK DATABASE for this key and associate a user to it.
     // OTHERWISE check for a cookie.
