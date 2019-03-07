@@ -22,7 +22,8 @@ console.log('20')
 db.collection('pc-user').get()
   .then((snapshot) => {
     snapshot.forEach((doc) => {
-      var docDataVal = doc.data().slice('key');
+      var docDataVal = doc.data();
+      var docSlice = docDataVal.slice()
       console.log(docDataVal)
       console.log(doc.id, '=>', doc.data());
     });
