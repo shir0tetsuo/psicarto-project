@@ -155,6 +155,8 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   console.log(request.cookies)
+  console.log(request.cookies.uid)
+  console.log(request.cookies.key)
   ////////// BROKEN: Null object cannot be detected?
   // Cross ref with database
   //db.collection('pc-user')
