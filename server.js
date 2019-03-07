@@ -44,14 +44,14 @@ function newCredentials(axis, key) {
   })
 }
 
-function CkSES(user) {
+function CkSES(userKey, userUID) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
-      console.log(doc.id, user.uid, doc._fieldsProto.key.stringValue, user.key)
-      var docID = doc.id,
-      docKEY = doc._fieldsProto.key.stringValue,
-      masUID = user.uid,
-      masKEY = user.key;
+      console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
+      var docID = doc.id;
+      var docKEY = doc._fieldsProto.key.stringValue;
+      var masUID = userUID;
+      var masKEY = userKey;
       if (docID = masUID) {
         if (docKEY = masKEY) {
           return "grant"
@@ -167,7 +167,9 @@ sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   var user = [{key: request.cookies.key, uid: request.cookies.uid}];
-  var checkSES = CkSES(user);
+  var userKey = request.cookies.key;
+  var userUID = request.cookies.uid;
+  var checkSES = CkSES(userKey, userUID);
   if (checkSES == "grant") {
     response.send('Hello, World!')
     return;
