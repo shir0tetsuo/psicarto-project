@@ -48,7 +48,7 @@ function CkSES(userKey, userUID) {
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       //console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
-      if (doc.id = userUID) {
+      if (doc.id*1 = userUID*1) {
         if (doc._fieldsProto.key.stringValue = userKey) {
           return "grant"
         } else {
