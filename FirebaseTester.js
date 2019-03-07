@@ -21,7 +21,7 @@ console.log('20')
 // READ
 db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
-      console.log(doc._fieldsProto)
+      console.log(doc._fieldsProto.key)
       console.log(doc.id, '=>', doc.data());
     });
   }).catch((err) => {
