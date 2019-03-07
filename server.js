@@ -158,9 +158,7 @@ sys.get('/pc/logout', function(request, response) {
 sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
-  var user = [];
-  var user.uid = request.cookies.uid,
-  user.key = request.cookies.key,
+  var user = [{key: request.cookies.key, uid: request.cookies.uid}];
   timeoutPage = fs.readFileSync('pages/301.html'),
   checkSES = CkSES(user);
   if (checkSES == "grant") {
