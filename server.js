@@ -156,12 +156,15 @@ sys.get('/pc/base', (request, response) => {
   ////////// BROKEN: Null object cannot be detected?
   // Cross ref with database
   //db.collection('pc-user')
+  /*
   var dataPokk = checkData(request, response);
   if (!dataPokk) {
     response.redirect("/pc")
   } else {
     response.send('Hello, World!')
   }
+  */
+  response.send('Hello, World!')
   //for x in request.cookies ...
 });
 // TODO: Test idnumber against key, add database
