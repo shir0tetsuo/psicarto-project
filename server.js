@@ -160,7 +160,6 @@ sys.get('/pc/base', (request, response) => {
       }
     }).catch(() => {
       console.log('SNAPSHOT ERROR!')
-      response.redirect('/pc')
     })
   }).catch(() => {
     console.log('COLLECTION ERROR!')
