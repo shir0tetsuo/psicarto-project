@@ -45,24 +45,7 @@ function newCredentials(axis, key) {
 }
 
 function CkCloud(testKey) {
-  if (!testKey) {
-    console.log(chalk.redBright('CkCloud NO KEY PASSED'))
-    return false;
-  }
-  db.collection('pc-user').get().then((snapshot) => {
-    snapshot.forEach((doc) => {
-      var trueId = Math.round(parseInt(doc.id));
-      console.log(testKey, chalk.yellowBright('against'), doc._fieldsProto.key.stringValue, chalk.blueBright('=> CkCloud'))
-      if (doc._fieldsProto.key.stringValue = testKey) {
-        console.log('Returning SUCCESS @ CkCloud')
-        return doc.id;
-      }
-    }).catch(() => {
-      console.log('SNAPSHOT ERROR! @ CkCloud')
-    })
-  }).catch(() => {
-    console.log('COLLECTION ERROR! @ CkCloud (301)')
-  })
+
 }
 
 function GenerateCookie(key) {
@@ -234,32 +217,46 @@ sys.post('/pc/login',function(req,res){
     // THIS IF STATEMENT below should come AFTER a database check!
     // CHECK DATABASE for this key and associate a user to it.
     // OTHERWISE check for a cookie.
-    var checkCloud = CkCloud(key)
-    if (checkCloud) {
-      console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
-      var fsAAA = GenerateDBCookie(key, checkCloud);
-      var fsAAB = CreateResponse(req, res, 'key');
-      var vsAAC = '';
-      var fsTRAIL = '';
-    } else if (axis[key] !== undefined) {
-      console.log('CHECKING LOCAL AXIS')
-      var fsAAA = GenerateCookie(key) // CreateNavigator(req, res)
-      var fsAAB = CreateResponse(req, res, 'key')
-      var fsAAC = ''
-      var fsTRAIL = ''
-    } else if (!checkCloud) {
-      console.log(chalk.redBright('Parsing bad checkCloud @', checkCloud, key))
-      var fsAAA = CreateNavigator(req, res),
-      fsAAB = CreateResponse(req, res, 'nokey'),
-      fsAAC = '<br><tilde>The dedicated server could not process your request.</tilde><br>',
-      fsTRAIL = fs.readFileSync('pages/trail.html')
-    } else {
-      console.log(chalk.redBright('Internal error'))
-      var fsAAA = CreateNavigator(req, res)
-      var fsAAB = CreateResponse(req, res, 'nokey')
-      var fsAAC = ''
-      var fsTRAIL = fs.readFileSync('pages/trail.html')
-    }
+    db.collection('pc-user').get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        var trueId = Math.round(parseInt(doc.id));
+        console.log(key, chalk.yellowBright('against'), doc._fieldsProto.key.stringValue, chalk.blueBright('=> CkCloud'))
+        if (doc._fieldsProto.key.stringValue == key) {
+          console.log('Returning SUCCESS @ CkCloud')
+          var checkCloud = doc.id
+        }
+      }).catch(() => {
+        console.log('SNAPSHOT ERROR! @ CkCloud')
+      })
+      if (checkCloud) {
+        console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
+        var fsAAA = GenerateDBCookie(key, checkCloud);
+        var fsAAB = CreateResponse(req, res, 'key');
+        var vsAAC = '';
+        var fsTRAIL = '';
+      } else if (axis[key] !== undefined) {
+        console.log('CHECKING LOCAL AXIS')
+        var fsAAA = GenerateCookie(key) // CreateNavigator(req, res)
+        var fsAAB = CreateResponse(req, res, 'key')
+        var fsAAC = ''
+        var fsTRAIL = ''
+      } else if (!checkCloud) {
+        console.log(chalk.redBright('Parsing bad checkCloud @', checkCloud, key))
+        var fsAAA = CreateNavigator(req, res),
+        fsAAB = CreateResponse(req, res, 'nokey'),
+        fsAAC = '<br><tilde>The dedicated server could not process your request.</tilde><br>',
+        fsTRAIL = fs.readFileSync('pages/trail.html')
+      } else {
+        console.log(chalk.redBright('Internal error'))
+        var fsAAA = CreateNavigator(req, res)
+        var fsAAB = CreateResponse(req, res, 'nokey')
+        var fsAAC = ''
+        var fsTRAIL = fs.readFileSync('pages/trail.html')
+      }
+    }).catch(() => {
+      console.log('COLLECTION ERROR! @ CkCloud (301)')
+    })
+
   } else {
     console.log(chalk.redBright('Internal error'))
     var fsAAA = CreateNavigator(req, res)
