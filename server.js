@@ -44,29 +44,6 @@ function newCredentials(axis, key) {
   })
 }
 
-function CkSES(userKey, userUID) {
-  // this isn't logging
-  db.collection('pc-user').get().then((snapshot) => {
-    snapshot.forEach((doc) => {
-      //console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
-      var trueId = Math.round(parseInt(doc.id));
-      var testId = Math.round(parseInt(userUID));
-      console.log(trueId, testId)
-      console.log(doc._fieldsProto.key.stringValue)
-      console.log(userKey)
-      if (trueId = testId) {
-        if (doc._fieldsProto.key.stringValue = userKey) {
-          return "grant"
-        } else {
-          console.log('tier2 fail =>', doc._fieldsProto.key.stringValue, userKey)
-        }
-      } else {
-        console.log('tier1 fail =>', doc.id, userUID)
-      }
-    })
-  })
-}
-
 function GenerateCookie(key) {
   console.log("Generating cookie.")
   var machine = '';
@@ -166,17 +143,20 @@ sys.get('/pc/base', (request, response) => {
   // if (cookie[database] !== undefined) .. else { response.send() }
   var userKey = request.cookies.key;
   var userUID = request.cookies.uid;
-  var checkSES = CkSES(userKey, userUID);
-  console.log(checkSES)
-  if (checkSES == "grant") {
-    response.send('Hello, World!')
-    return;
-    // Do other stuff???
-  } else if (checkSES == undefined) {
-    userLOGOUT(request, response);
-  } else {
-    console.log('error')
-  }
+  db.collection('pc-user').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      var trueId = Math.round(parseInt(doc.id));
+      var testId = Math.round(parseInt(userUID));
+      console.log(trueId, testId)
+      console.log(doc._fieldsProto.key.stringValue)
+      console.log(userKey)
+      if (trueId = testId) {
+        if (doc._fieldsProto.key.stringValue = userKey) {
+          response.send("Hello, World!")
+        }
+      }
+    })
+  })
 });
 sys.get('/pc/logout', function(request, response) {
   userLOGOUT(request, response);
