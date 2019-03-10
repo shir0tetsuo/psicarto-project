@@ -154,6 +154,8 @@ sys.get('/pc/base', (request, response) => {
         if (doc._fieldsProto.key.stringValue = userKey) {
           response.send("Hello, World!")
           return
+        } else {
+          response.redirect('/pc')
         }
       }
     })
