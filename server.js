@@ -45,11 +45,15 @@ function newCredentials(axis, key) {
 }
 
 function CkSES(userKey, userUID) {
+  // this isn't logging
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       //console.log(doc.id, userUID, doc._fieldsProto.key.stringValue, userKey)
       var trueId = parseInt(doc.id);
       var testId = parseInt(userUID);
+      console.log(trueId, testId)
+      console.log(doc._fieldsProto.key.stringValue)
+      console.log(userKey)
       if (trueId = testId) {
         if (doc._fieldsProto.key.stringValue = userKey) {
           return "grant"
