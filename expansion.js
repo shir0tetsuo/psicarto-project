@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 module.exports = {
    Cryptographic: function (xlen) {
     if (!xlen) var xlen = 1
