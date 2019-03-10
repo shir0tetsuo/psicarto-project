@@ -166,6 +166,8 @@ sys.get('/pc/base', (request, response) => {
     response.redirect('/pc')
   })
   return
+}).catch(() => {
+  console.log('BASE ERROR!')
 });
 
 
