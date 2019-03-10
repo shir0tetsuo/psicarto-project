@@ -209,12 +209,14 @@ sys.post('/pc/login',function(req,res){
         var trueId = Math.round(parseInt(doc.id));
         console.log(key, chalk.yellowBright('against'), doc._fieldsProto.key.stringValue, chalk.blueBright('=> CkCloud'))
         if (doc._fieldsProto.key.stringValue == key) {
-          console.log('Returning SUCCESS @ CkCloud')
+          console.log(chalk.greenBright('Returning SUCCESS @ CkCloud'))
           var checkCloud = doc.id
         }
       }).catch(() => {
         console.log('SNAPSHOT ERROR! @ CkCloud')
       })
+      console.log(checkCloud)
+      console.log('RUN OK')
       if (checkCloud) {
         console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
         var fsAAA = GenerateDBCookie(key, checkCloud);
