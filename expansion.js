@@ -1,5 +1,5 @@
 module.exports = {
-  function Cryptographic(xlen) {
+   Cryptographic: function (xlen) {
     if (!xlen) var xlen = 1
       var charset = "0123456789XYACD+-Oo.eE=/Z",
           retVal = "";
