@@ -44,6 +44,27 @@ function newCredentials(axis, key) {
   })
 }
 
+function CkCloud(testId) {
+  if (!testId) {
+    return false;
+  }
+  db.collection('pc-user').get().then((snapshot) => {
+    snapshot.forEach((doc) => {
+      var trueId = Math.round(parseInt(doc.id));
+      console.log(trueId, testId, chalk.blueBright('=> CkCloud'))
+      console.log(doc._fieldsProto.key.stringValue)
+      if (doc._fieldsProto.key.stringValue = userKey) {
+        console.log('Returning SUCCESS @ CkCloud')
+        return doc.id;
+      }
+    }).catch(() => {
+      console.log('SNAPSHOT ERROR! @ CkCloud')
+    })
+  }).catch(() => {
+    console.log('COLLECTION ERROR! @ CkCloud (301)')
+  })
+}
+
 function GenerateCookie(key) {
   console.log("Generating cookie.")
   var machine = '';
@@ -52,6 +73,22 @@ function GenerateCookie(key) {
   dateData.setHours(dateData.getHours() + 3)
   // Can possibly handle and skip the PC login process and head to the new page.
   machine += `document.cookie = 'uid=${axis[key]}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
+  machine += '\n'
+  machine += `document.cookie = 'key=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
+  machine += '\n'
+  machine += '</script>'
+  newCredentials(axis, key)
+  return machine
+}
+
+function GenerateDBCookie(key, uid) {
+  console.log("Generating Database cookie.")
+  var machine = '';
+  machine += '<script type="text/javascript">'
+  const dateData = new Date();
+  dateData.setHours(dateData.getHours() + 3)
+  // Can possibly handle and skip the PC login process and head to the new page.
+  machine += `document.cookie = 'uid=${uid}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
   machine += '\n'
   machine += `document.cookie = 'key=${key}; path="/pc"; Secure; expires=${dateData.toUTCString()};'`;
   machine += '\n'
@@ -112,6 +149,7 @@ function CreateNavigator(request, response) {
 }
 
 function CreateResponse(request, response, handle) {
+  console.log('CreateResponse @', handle)
   if (handle == 'error') return fs.readFileSync('pages/Error.html');
   if (handle == 'idnum') return '';
   if (handle == 'nokey') return fs.readFileSync('pages/nokey.html');
@@ -124,6 +162,7 @@ sys.use(bodyParser.urlencoded({ extended: false })); // allow POST callback
 sys.use(bodyParser.json()); // allow POST callback
 
 sys.get('/pc', (request, response) => {
+  console.log('PROCESSING', request.url)
   const fsHEAD = fs.readFileSync('pages/head.html')
   const fsAAA = CreateNavigator(request, response)// Do some extra stuff to ensure login here
   var fsTRAIL = fs.readFileSync('pages/trail.html')
@@ -133,16 +172,19 @@ sys.get('/pc', (request, response) => {
   response.send(GumGum)
 })
 function userLOGOUT(request, response) {
+  console.log('PROCESSING LOGOUT REQUEST')
   returnPage = fs.readFileSync('pages/301.html')
   response.send(returnPage);
   //response.redirect('/pc');
   return;
 }
 sys.get('/pc/base', (request, response) => {
+  console.log(chalk.greenBright('==== PROCESSING /pc/base REQUEST'))
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
   var userKey = request.cookies.key;
   var userUID = request.cookies.uid;
+  console.log('cookies => ', request.cookies)
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       var trueId = Math.round(parseInt(doc.id));
@@ -152,7 +194,7 @@ sys.get('/pc/base', (request, response) => {
       console.log(userKey)
       if (trueId = testId) {
         if (doc._fieldsProto.key.stringValue = userKey) {
-          response.send("Hello, World!")
+          response.send("Hello, World!") // DO LOTS OF THINGS HERE.
           console.log('Returning Data.')
           return
         }
@@ -170,36 +212,56 @@ sys.get('/pc/base', (request, response) => {
 
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
+  console.log(chalk.greenBright('==== HANDLING /PC/LOGIN Request'))
   var idnumber=req.body.idnumber;
   var key = req.body.key;
   const fsHEAD = fs.readFileSync('pages/head.html')
   if (idnumber.length !== 0 && key.length !== 0) {
+    console.log(chalk.redBright('ID ZERO & KEY ZERO'))
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'error')
     var fsAAC = ''
     var fsTRAIL = fs.readFileSync('pages/trail.html')
   } else if (idnumber.length !== 0 && key.length == 0 && isNaN(idnumber) == false && idnumber.length >= 18 && idnumber.length < 22) { // If number is a number and the length is proper
+    console.log(chalk.blueBright('IDLENGTH OK'))
     var fsAAA = CreateNavigator(req, res)
     var fsAAC = GenerateAuthKey(idnumber) // Connect with bot and send a message using Discord ID
     var fsAAB = CreateResponse(req, res, 'idnum')
     var fsTRAIL = fs.readFileSync('pages/trail.html')
   } else if (key.length !== 0 && idnumber.length == 0) {
+    console.log('KEYLENGTH OK')
     //// TODO
     // THIS IF STATEMENT below should come AFTER a database check!
     // CHECK DATABASE for this key and associate a user to it.
     // OTHERWISE check for a cookie.
-    if (axis[key] !== undefined) {
+    var checkCloud = ckCloud(key)
+    if (checkCloud) {
+      console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
+      var fsAAA = GenerateDBCookie(key, checkCloud);
+      var fsAAB = CreateResponse(req, res, 'key');
+      var vsAAC = '';
+      var fsTRAIL = '';
+    } else if (axis[key] !== undefined) {
+      console.log('CHECKING LOCAL AXIS')
       var fsAAA = GenerateCookie(key) // CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'key')
       var fsAAC = ''
       var fsTRAIL = ''
+    } else if (!checkCloud) {
+      console.log(chalk.redBright('Parsing bad checkCloud @', checkCloud, key))
+      var fsAAA = CreateNavigator(req, res),
+      fsAAB = CreateResponse(req, res, 'nokey'),
+      fsAAC = '<br><tilde>The dedicated server could not process your request.</tilde><br>',
+      fsTRAIL = fs.readFileSync('pages/trail.html')
     } else {
+      console.log(chalk.redBright('Internal error'))
       var fsAAA = CreateNavigator(req, res)
       var fsAAB = CreateResponse(req, res, 'nokey')
       var fsAAC = ''
       var fsTRAIL = fs.readFileSync('pages/trail.html')
     }
   } else {
+    console.log(chalk.redBright('Internal error'))
     var fsAAA = CreateNavigator(req, res)
     var fsAAB = CreateResponse(req, res, 'error')
     var fsAAC = ''
@@ -222,6 +284,7 @@ client.on("message", message => {
 })
 
 sys.use(function (req, res, next) {
+  console.log(chalk.redBright('404 Reached @', req.url))
   var axdead = '';
   axdead += '<!DOCTYPE html>\n'
   axdead += '<html><head><link rel="stylesheet" href="/pc/css/main.css"></head><body>\n'
