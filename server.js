@@ -204,6 +204,7 @@ sys.post('/pc/login',function(req,res){
     // THIS IF STATEMENT below should come AFTER a database check!
     // CHECK DATABASE for this key and associate a user to it.
     // OTHERWISE check for a cookie.
+    // MAYBE UNNEST THESE because database is checked before new KEY
     db.collection('pc-user').get().then((snapshot) => {
       snapshot.forEach((doc) => {
         var trueId = Math.round(parseInt(doc.id));
@@ -213,22 +214,23 @@ sys.post('/pc/login',function(req,res){
           var checkCloud = doc.id
         }
       }).catch(() => {
+        // BROKEN
         console.log('SNAPSHOT ERROR! @ CkCloud')
       })
       console.log(checkCloud)
       console.log('RUN OK')
-      if (checkCloud) {
-        console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
-        var fsAAA = GenerateDBCookie(key, checkCloud);
-        var fsAAB = CreateResponse(req, res, 'key');
-        var vsAAC = '';
-        var fsTRAIL = '';
-      } else if (axis[key] !== undefined) {
+      if (axis[key] !== undefined) {
         console.log('CHECKING LOCAL AXIS')
         var fsAAA = GenerateCookie(key) // CreateNavigator(req, res)
         var fsAAB = CreateResponse(req, res, 'key')
         var fsAAC = ''
         var fsTRAIL = ''
+      } else if (checkCloud) { // BROKEN
+        console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
+        var fsAAA = GenerateDBCookie(key, checkCloud);
+        var fsAAB = CreateResponse(req, res, 'key');
+        var vsAAC = '';
+        var fsTRAIL = '';
       } else if (!checkCloud) {
         console.log(chalk.redBright('Parsing bad checkCloud @', checkCloud, key))
         var fsAAA = CreateNavigator(req, res),
