@@ -44,16 +44,16 @@ function newCredentials(axis, key) {
   })
 }
 
-function CkCloud(testId) {
-  if (!testId) {
+function CkCloud(testKey) {
+  if (!testKey) {
+    console.log(chalk.redBright('CkCloud NO KEY PASSED'))
     return false;
   }
   db.collection('pc-user').get().then((snapshot) => {
     snapshot.forEach((doc) => {
       var trueId = Math.round(parseInt(doc.id));
-      console.log(trueId, testId, chalk.blueBright('=> CkCloud'))
-      console.log(doc._fieldsProto.key.stringValue)
-      if (doc._fieldsProto.key.stringValue = userKey) {
+      console.log(testKey, chalk.yellowBright('against'), doc._fieldsProto.key.stringValue, chalk.blueBright('=> CkCloud'))
+      if (doc._fieldsProto.key.stringValue = testKey) {
         console.log('Returning SUCCESS @ CkCloud')
         return doc.id;
       }
