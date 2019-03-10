@@ -153,6 +153,7 @@ sys.get('/pc/base', (request, response) => {
       if (trueId = testId) {
         if (doc._fieldsProto.key.stringValue = userKey) {
           response.send("Hello, World!")
+          return
         }
       }
     })
