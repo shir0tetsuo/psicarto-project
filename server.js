@@ -159,8 +159,12 @@ sys.get('/pc/base', (request, response) => {
         }
       }
     }).catch(() => {
-      console.log('Something went wrong.')
+      console.log('SNAPSHOT ERROR!')
+      response.redirect('/pc')
     })
+  }).catch(() => {
+    console.log('COLLECTION ERROR!')
+    response.redirect('/pc')
   })
 });
 sys.get('/pc/logout', function(request, response) {
