@@ -165,6 +165,7 @@ sys.get('/pc/base', (request, response) => {
     console.log('COLLECTION ERROR!')
     response.redirect('/pc')
   })
+  return
 });
 sys.get('/pc/logout', function(request, response) {
   userLOGOUT(request, response);
