@@ -164,10 +164,10 @@ function userLOGOUT(request, response) {
 sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
-  var user = [{key: request.cookies.key, uid: request.cookies.uid}];
   var userKey = request.cookies.key;
   var userUID = request.cookies.uid;
   var checkSES = CkSES(userKey, userUID);
+  console.log(checkSES)
   if (checkSES == "grant") {
     response.send('Hello, World!')
     return;
