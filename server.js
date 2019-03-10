@@ -234,7 +234,7 @@ sys.post('/pc/login',function(req,res){
     // THIS IF STATEMENT below should come AFTER a database check!
     // CHECK DATABASE for this key and associate a user to it.
     // OTHERWISE check for a cookie.
-    var checkCloud = ckCloud(key)
+    var checkCloud = CkCloud(key)
     if (checkCloud) {
       console.log(chalk.blueBright('CLOUD RETURNED =>', checkCloud))
       var fsAAA = GenerateDBCookie(key, checkCloud);
