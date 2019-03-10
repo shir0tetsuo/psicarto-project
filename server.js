@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const http = require('http');
 const chalk = require('chalk')
 const express = require('express')
+const exp = require('expansion.js')
 const sys = express()
 const path = require('path')
 const Cp = require('cookie-parser')
@@ -44,9 +45,6 @@ function newCredentials(axis, key) {
   })
 }
 
-function CkCloud(testKey) {
-
-}
 
 function GenerateCookie(key) {
   console.log("Generating cookie.")
@@ -80,17 +78,6 @@ function GenerateDBCookie(key, uid) {
   return machine
 }
 
-function Cryptographic(xlen) {
-  if (!xlen) var xlen = 1
-    var charset = "0123456789XYACD+-Oo.eE=/Z",
-        retVal = "";
-    for (var i = 0, n = charset.length; i < xlen; ++i) {
-        retVal += charset.charAt(Math.floor(Math.random() * n));
-    }
-    console.log(chalk.blueBright("Generated new key = "+retVal))
-    return retVal;
-}
-
 function GenerateAuthKey(uid) {
   // Connect to bot here
   // Do not commit to SQL unless the auth key is used
@@ -98,7 +85,7 @@ function GenerateAuthKey(uid) {
   //const person = persons.find(x => x.id == uid)
   const person = client.users.get(uid)
   if (timer.has(uid)) return fs.readFileSync('pages/throttleWarn.html');
-  const token = Cryptographic(18)
+  const token = exp.Cryptographic(18)
   axis[token] = uid;
   timer.add(uid)
   setTimeout(() => {
