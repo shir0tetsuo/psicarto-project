@@ -167,9 +167,7 @@ sys.get('/pc/base', (request, response) => {
   })
   return
 });
-sys.get('/pc/logout', function(request, response) {
-  userLOGOUT(request, response);
-});
+
 
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
