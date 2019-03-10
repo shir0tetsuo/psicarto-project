@@ -158,6 +158,8 @@ sys.get('/pc/base', (request, response) => {
           response.redirect('/pc')
         }
       }
+    }).catch(() => {
+      console.log('Something went wrong.')
     })
   })
 });
