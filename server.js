@@ -153,9 +153,8 @@ sys.get('/pc/base', (request, response) => {
       if (trueId = testId) {
         if (doc._fieldsProto.key.stringValue = userKey) {
           response.send("Hello, World!")
+          console.log('Returning Data.')
           return
-        } else {
-          response.redirect('/pc')
         }
       }
     }).catch(() => {
@@ -166,8 +165,6 @@ sys.get('/pc/base', (request, response) => {
     response.redirect('/pc')
   })
   return
-}).catch(() => {
-  console.log('BASE ERROR!')
 });
 
 
