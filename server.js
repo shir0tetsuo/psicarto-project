@@ -161,9 +161,6 @@ function userLOGOUT(request, response) {
   //response.redirect('/pc');
   return;
 }
-sys.get('/pc/logout', function(request, response) {
-  userLOGOUT(request, response);
-});
 sys.get('/pc/base', (request, response) => {
   // Connect to database here. Use cookie parser here.
   // if (cookie[database] !== undefined) .. else { response.send() }
@@ -181,6 +178,10 @@ sys.get('/pc/base', (request, response) => {
     console.log('error')
   }
 });
+sys.get('/pc/logout', function(request, response) {
+  userLOGOUT(request, response);
+});
+
 // TODO: Test idnumber against key, add database
 sys.post('/pc/login',function(req,res){
   var idnumber=req.body.idnumber;
